@@ -4,7 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>부동산 도우미 - 홈 페이지</title>
+
+  <!-- 브라우저 css 기본스타일 초기화 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+
+  <!-- 제이쿼리 사용하여 header, footer를 include  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">   
+    $(document).ready(function() {
+      $("#headers").load("./html/menu.html");
+    });
+  </script>
 
   <!-- The Open Graph Protocal -->
   <meta property="og:type" content="website">
@@ -14,41 +24,21 @@
   <meta property="og:image" content="./images/for_seo.jpg">
   <meta property="og:url" content="">
 
-  <!--Google Fonts-->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- css 링크  -->
   <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/menu.css">
 </head>
 
 <body>
-  <!--Header-->
-  <header>
-    <div class="inner">
-      <a href="/" class="logo">
-        <img src="./images/logo.png">
-      </a>
 
-      <div class="sub-menu">
-        <ul class="menu">
-          <li><a href="#">홈으로</a></li>
-          <li><a href="#">로그인</a></li>
-          <li><a href="#">회원가입</a></li>
-        </ul>
-      </div>
-
-      <ul class="main-menu">
-        <li class="item"><a class="item-name" href="#">특약사항</a></li>
-        <li class="item"><a class="item-name" href="#">질문&답변</a></li>
-        <li class="item"><a class="item-name" href="#">부동산뉴스</a></li>
-        <li class="item"><a class="item-name" href="#">매물찾아요</a></li>
-        <li class="item"><a class="item-name" href="#">구인구직</a></li>
-        <li class="item"><a class="item-name" href="#">부동산서식모음</a></li>
-      </ul>
-
-    </div>
-  </header>
+  <!-- Header -->
+  <header id="headers"></header>
 
 </body>
 
