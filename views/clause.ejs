@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부동산 도우미 - 특약사항 페이지</title>
+  <meta name="description" content="부동산 도우미 웹사이트는 부동산 계약 특약사항 작성에 도움을 드립니다">
+
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+  
+  <!-- Clipboardl.js 라이브러리 사용 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+
+  <!-- 제이쿼리 사용하여 header, footer를 include  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">   
+    $(document).ready(function() {
+      $("#headers").load("../html/menu.html");
+    });
+  </script>
+
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/clause.css">
+  <link rel="stylesheet" href="../css/dropdown.css">
+  <link rel="stylesheet" href="../css/table.css">
+
+  <!-- JS 링크 -->
+  <script src="../js/dropdown.js"></script>
+  <script src="../js/table.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ===== Header ===== -->
+  <header id="headers"></header>
+
+  <!-- ===== 드롭다운바 ===== -->
+  <div class="navibar">
+    <div class="dropdown">
+      <button id="apt" class="dropbtn" onclick="clickMenuBtn(this.id)">아파트</button>
+      <div id="apt-Dropdown" class="dropdown-content">
+        <a href="/type/apt_trade" class="menu">매매</a>
+        <a href="/type/apt_jeonse" class="menu">전세</a>
+        <a href="/type/apt_monthly" class="menu">월세</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button id="officetel" class="dropbtn" onclick="clickMenuBtn(this.id)">오피스텔
+      </button>
+      <div id="officetel-Dropdown" class="dropdown-content">
+        <a href="/type/officetel_trade" class="menu">매매</a>
+        <a href="/type/officetel_jeonse" class="menu">전세</a>
+        <a href="/type/officetel_monthly" class="menu">월세</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button id="dasedae" class="dropbtn" onclick="clickMenuBtn(this.id)">다세대주택</button>
+      <div id="dasedae-Dropdown" class="dropdown-content">
+        <a href="/type/dasedae_trade" class="menu">매매</a>
+        <a href="/type/dasedae_jeonse" class="menu">전세</a>
+        <a href="/type/dasedae_monthly" class="menu">월세</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button id="dagagu" class="dropbtn" onclick="clickMenuBtn(this.id)">다가구주택</button>
+      <div id="dagagu-Dropdown" class="dropdown-content">
+        <a href="/type/dagagu_trade" class="menu">매매</a>
+        <a href="/type/dagagu_jeonse" class="menu">전세</a>
+        <a href="/type/dagagu_monthly" class="menu">월세</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button id="oneroom" class="dropbtn" onclick="clickMenuBtn(this.id)">원룸</button>
+      <div id="oneroom-Dropdown" class="dropdown-content">
+        <a href="/type/oneroom_jeonse" class="menu">전세</a>
+        <a href="/type/oneroom_monthly" class="menu">월세</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button id="shop" class="dropbtn" onclick="clickMenuBtn(this.id)" style="color:yellowgreen;">상가</button>
+      <div id="shop-Dropdown" class="dropdown-content">
+        <a href="/type/shop_trade" class="menu">매매</a>
+        <a href="/type/shop_monthly" class="menu">월세</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button id="factory" class="dropbtn" onclick="clickMenuBtn(this.id)" style="color:yellowgreen;">공장/창고</button>
+      <div id="factory-Dropdown" class="dropdown-content">
+        <a href="/type/factory_trade">매매</a>
+        <a href="/type/factory_monthly">월세</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button id="land" class="dropbtn" onclick="clickMenuBtn(this.id)" style="color:yellowgreen;">토지</button>
+      <div id="land-Dropdown" class="dropdown-content">
+        <a href="/type/land_trade">매매</a>
+        <a href="/type/land_monthly">월세</a>
+      </div>
+    </div>
+  
+    <div class="dropdown">
+      <button id="etc" class="dropbtn" onclick="clickMenuBtn(this.id)" style="color:yellow;">기타</button>
+      <div id="etc-Dropdown" class="dropdown-content">
+        <a href="/type/etc">기타</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== 특약테이블 ===== -->
+  <div>
+    <br>
+    <table class="table-clause">
+      <% for(let i=0; i<data.length; i++) { %>
+        <tr style="height:40px">
+          <td style="width:12%">
+            <input type="checkbox" class="checkbox" id="<%= data[i].id %>" data-id="<%= data[i].id %>">
+            <label for="<%= data[i].id %>"> <%= data[i].title %> </label> 
+          </td>
+          <td>
+            <label class="table-clause-content"> <%= data[i].content %></label> 
+          </td>
+        </tr> 
+      <% } %> 
+    </table><br>
+
+    <input type="button" class="copy-button" data-clipboard-target="#copy-content" value="복사하기">
+    <span>(위 특약사항을 선택후, 복사하기 버튼을 클릭하고 계약서 작성 프로그램의 특약사항란에 붙여넣기(Ctrl+V) 하시면 됩니다)</span>
+    <br><br>
+  </div>
+
+  <!-- ===== 특약정리 ===== -->
+  <div>
+    <form action="/Copy.php">
+      <textarea id="copy-content" name="message" rows="20"></textarea>
+    </form>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+.table-clause {
+  width: 98%;
+}
+
+.table-clause, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.table-clause-content {
+  color: darkgray;
+  padding-left: 15px;
+}
+
+#copy-content {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+  font-size: 16px;
+  
+  width: 98%;
+}
+
+.copy-button {
+  border: none; 
+  color: white; 
+  padding: 10px 20px; 
+  cursor: pointer; /* Add a pointer cursor on mouse-over */
+  background-color: #04AA6D;
+}
+
+.copy-button:hover {
+  background-color: #46a049;
+}
+

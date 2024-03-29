@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box
+}
+
+.findid-box {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.findid-container {
+  padding: 16px;
+  width: 400px;
+  border: 1px solid;
+  border-color: darkgray;
+  border-radius: 1%;
+}
+
+h1 {
+  text-align: center;
+}
+
+hr {
+  border: 1px solid #dcdbdb;
+  margin-bottom: 25px;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.findid_btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 15px;
+}
+
+.findid-add {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.findid-add a {
+  font-size: 14px;
+  margin: 0px 15px;
+  color: rgb(97, 97, 97);
+  text-decoration-line: none;
+}
+
+.findid-add a:hover {
+  color: rgb(0, 0, 0);
+}
+
+

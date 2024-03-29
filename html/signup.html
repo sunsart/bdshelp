@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부동산 도우미 - 회원가입 페이지</title>
+  <meta name="description" content="부동산 도우미에 회원가입 하고 다양한 서비스를 이용해 보세요">
+  
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+
+  <!-- 제이쿼리 사용하여 header, footer를 include  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">   
+    $(document).ready(function() {
+      $("#headers").load("./menu.html");
+    });
+  </script>
+
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header id="headers"></header>
+
+  <div class="signup-box">
+    <form action="#">
+      <div class="signup-container">
+        <span class="signup-title">회원가입</span>
+        <hr>
+    
+        <label for="member-id">아이디</label>
+        <input type="text" name="member-id" id="member-id" required>
+    
+        <label for="member-pw1">비밀번호</label>
+        <input type="password" name="member-pw1" id="member-pw1" required>
+
+        <label for="member-pw2">비밀번호 재입력</label>
+        <input type="password" name="member-pw2" id="member-pw2" required>
+
+        <label for="member-email">이메일주소</label>
+        <input type="password" name="member-email" id="member-email" placeholder="비밀번호 분실시 사용됩니다" required>
+
+        <input type="checkbox" id="terms-check" style="margin-top:-20px;">
+			  <label for="terms-check" style="margin-top:-20px;">약관 내용에 동의합니다</label>
+        <a href="#" style="padding-left: 90px;">*약관내용</a>
+        
+        <br><br>
+    
+        <button type="submit" class="signup-btn">회원가입</button>
+      </div>
+    
+      <div class="signup-add">
+        <!-- <a href="http://127.0.0.1/8080">홈으로</a>  -->
+        <a href="/">홈으로</a>
+      </div>
+    </form>
+  </div>
+      
+</body>
+</html>
