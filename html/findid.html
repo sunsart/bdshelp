@@ -2,28 +2,44 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="부동산 도우미 - 아이디 찾기">
   <title>부동산 도우미 - 아이디 찾기 페이지</title>
+  <meta name="description" content="부동산 도우미 웹사이트 - 아이디 찾기">
+  
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+
+  <!-- 제이쿼리 사용하여 header, footer를 include  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">   
+    $(document).ready(function() {
+      $("#headers").load("./menu.html");
+    });
+  </script>
+
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/findid.css">
 </head>
 <body>
 
+  <!-- ===== Header ===== -->
+  <header id="headers"></header>
+
   <div class="findid-box">
     <form action="#">
       <div class="findid-container">
-        <h1>아이디 찾기</h1>
+        <span class="findid-title">아이디 찾기</span>
         <hr>
     
-        <label for="findid_email">회원가입시 작성한 이메일주소를 입력해주세요</label>
-        <input type="text" id="findid_email">
+        <label for="findid-email">회원가입시 작성한 이메일주소를 입력하세요</label>
+        <input type="text" id="findid-email" required>
 
-        <button type="button" class="findid_btn">아이디찾기</button>
+        <button type="submit" class="findid-btn">아이디찾기</button>
       </div>
     
       <div class="findid-add">
-        <a href="./login.html">로그인</a>
+        <a href="/">홈으로</a>
       </div>
     </form>
   </div>
