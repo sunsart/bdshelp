@@ -1,19 +1,54 @@
-* {
-  box-sizing: border-box
+/* 화면 전체를 불투명한 창으로 덮기 */
+.background-findpw {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  
+  /* 화면에서 숨기기 */
+  z-index: -1;
+  opacity: 0;
 }
 
-.findpw-box {
-  display: flex;
-  justify-content: center;
-  padding-top: 100px;
+/* 화면에 보이기 */
+.show-findpw {
+  opacity: 1;
+  z-index: 1001;
+  transition: all .5s;
 }
 
-.findpw-container {
-  padding: 16px;
+.window-findpw {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-findpw {
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  
+  /* 팝업창 크기 */
   width: 400px;
-  border: 1px solid;
-  border-color: darkgray;
-  border-radius: 1%;
+  height: 400px;
+  
+  /* 초기에 약간 아래에 배치 */
+  transform: translate(-50%, -40%);
+}
+
+.container-findpw {
+  padding: 16px;
+}
+
+.show-findpw .popup-findpw {
+  transform: translate(-50%, -50%);
+  transition: all .5s;
 }
 
 .findpw-title {
@@ -21,7 +56,7 @@
   align-items: center;
   display: flex;
   
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
 }
 
@@ -31,7 +66,8 @@ hr {
   margin-bottom: 25px;
 }
 
-input[type=text] {
+/* 아이디, 이메일 입력창 */
+#findpw-name #findpw-email {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -40,41 +76,25 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=text]:focus {
-  background-color: #ddd;
-  outline: none;
+#findpw-email {
+  margin-bottom: 20px;
 }
 
+/* 비밀번호찾기 버튼, 취소 버튼 */
 .findpw-btn {
   background-color: #04AA6D;
   color: white;
   padding: 16px 20px;
-  margin: 16px 0px;
+  margin: 4px 0px;
   border: none;
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .findpw-btn:hover {
   opacity:1;
-}
-
-.findpw-add {
-  text-align: center;
-  padding-top: 15px;
-}
-
-.findpw-add a {
-  font-size: 14px;
-  margin: 0px 15px;
-  color: rgb(97, 97, 97);
-  text-decoration-line: none;
-}
-
-.findpw-add a:hover {
-  color: rgb(0, 0, 0);
 }
 
 

@@ -20,6 +20,12 @@
   <!-- css 링크  -->
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/findid.css">
+  <link rel="stylesheet" href="../css/findpw.css">
+
+  <!-- js 링크  -->
+  <script src="../js/findid.js"></script>
+  <script src="../js/findpw.js"></script>
 </head>
 <body>
 
@@ -42,11 +48,52 @@
       </div>
     
       <div class="login-add">
-        <a href="/html/findpw.html">비밀번호 찾기</a> 
-        <a href="/html/findid.html">아이디 찾기</a>
+        <a href="#" onclick="showFindpw();">비밀번호 찾기</a> 
+        <a href="#" onclick="showFindid();">아이디 찾기</a>
         <a href="/html/signup.html">회원가입</a>
       </div>
     </form>
+  </div>
+
+  <!-- 아이디 찾기 팝업 -->
+  <div class="background-findid">
+    <div class="window-findid">
+      <div class="popup-findid">
+        <div class="container-findid">
+
+          <span class="findid-title">아이디 찾기</span>
+          <hr>
+
+          <label for="findid-email">회원가입시 작성한 이메일주소를 입력하세요</label>
+          <input type="text" id="findid-email" required>
+
+          <button type="button" class="findid-btn" onclick="findid();">아이디 찾기</button>
+          <button type="button" class="findid-btn" onclick="closeFindid();">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비밀번호 찾기 팝업 -->
+  <div class="background-findpw">
+    <div class="window-findpw">
+      <div class="popup-findpw">
+        <div class="container-findpw">
+
+          <span class="findpw-title">비밀번호 찾기</span>
+          <hr>
+
+          <label for="findpw-name">아이디</label>
+          <input type="text" id="findpw-name" required>
+
+          <label for="findpw-email">회원가입시 작성한 이메일주소를 입력하세요</label>
+          <input type="text" id="findpw-email" required>
+
+          <button type="submit" class="findpw-btn" onclick="findpw();">비밀번호 찾기</button>
+          <button type="submit" class="findpw-btn" onclick="closeFindpw();">취소</button>
+        </div>
+      </div>
+    </div>
   </div>
       
 </body>

@@ -1,0 +1,113 @@
+/* 화면 전체를 불투명한 창으로 덮기 */
+.background_editpw {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  
+  /* 화면에서 숨기기 */
+  z-index: -1;
+  opacity: 0;
+}
+
+/* 화면에 보이기 */
+.show_editpw {
+  opacity: 1;
+  z-index: 1001;
+  transition: all .5s;
+}
+
+.window_editpw {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.popup_editpw {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  
+  /* 팝업창 크기 */
+  width: 500px;
+  height: 140px;
+  
+  /* 초기에 약간 아래에 배치 */
+  transform: translate(-50%, -40%);
+}
+
+.show_editpw .popup_editpw {
+  transform: translate(-50%, -50%);
+  transition: all .5s;
+}
+
+/* ============================================== */
+
+/* 6코드 입력창 */
+#sixcode {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* 전송코드 확인 버튼 */
+.sixcode_confirm_btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border: none;
+  cursor: pointer;
+}
+.sixcode_confirm_btn:hover {
+  background-color: #0ec481;
+}
+
+/* 전송코드 취소 버튼 */
+.sixcode_calcel_btn {
+  background-color: #474747;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border: none;
+  cursor: pointer;
+}
+.sixcode_calcel_btn:hover {
+  background-color: #635e5e;
+}
+
+/* 비밀번호 입력창, 재입력창 */
+#to_pw1 #to_pw2 {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* 비밀번호변경, 취소 버튼 */
+.editpw_btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* 팝업창 내부 컨테이너 */
+.container_editpw {
+  padding: 16px;
+}
+
