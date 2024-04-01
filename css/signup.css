@@ -45,6 +45,18 @@ input[type=text]:focus, input[type=password]:focus {
   outline: none;
 }
 
+#terms-check {
+  margin-top:-20px;
+}
+
+.terms-label {
+  margin-top:-20px;
+}
+
+.terms-link {
+  padding-left: 90px;
+}
+
 .signup-btn {
   background-color: #04AA6D;
   color: white;

@@ -20,6 +20,9 @@
   <!-- css 링크  -->
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/signup.css">
+
+  <!-- JS 링크 -->
+  <script src="../js/signup.js"></script>
 </head>
 <body>
 
@@ -42,15 +45,15 @@
         <input type="password" name="member-pw2" id="member-pw2" required>
 
         <label for="member-email">이메일주소</label>
-        <input type="password" name="member-email" id="member-email" placeholder="비밀번호 분실시 사용됩니다" required>
+        <input type="text" name="member-email" id="member-email" placeholder="비밀번호 분실시 사용됩니다" required>
 
-        <input type="checkbox" id="terms-check" style="margin-top:-20px;">
-			  <label for="terms-check" style="margin-top:-20px;">약관 내용에 동의합니다</label>
-        <a href="#" style="padding-left: 90px;">*약관내용</a>
+        <input type="checkbox" id="terms-check">
+			  <label for="terms-check" class="terms-label">약관 내용에 동의합니다</label>
+        <a href="#" class="terms-link">*약관내용</a>
         
         <br><br>
     
-        <button type="submit" class="signup-btn">회원가입</button>
+        <button type="button" class="signup-btn" onclick="checkSignup()">회원가입</button>
       </div>
     
       <div class="signup-add">

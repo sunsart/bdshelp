@@ -24,31 +24,13 @@ app.set('view engine', 'ejs');
 //서버가 정적파일을 제공하도록 하기 위한 설정
 app.use(express.static(__dirname + ''));
 
+//라우터 분리
+app.use('/', require('./routes/auth.js'));
+app.use('/', require('./routes/list.js'));
+
 app.listen(8080, function(){
   console.log("포트 8080으로 서버 대기중 ...")
-});
+}); 
 
-app.get('/', function(req, res){
-  res.render('index.ejs');
-});
 
-app.get('/clause', function(req, res){
-  let sql = "SELECT * FROM basics WHERE type=? AND title!=''";
-  let params = "apt_trade";
-  conn.query(sql, params, function(err, rows) {
-    if(err) throw err;
-    res.render('clause.ejs', {data:rows});
-  })
-});
-
-//시멘틱 url, 네비게이션바에서 메뉴 선택시 테이블 내용 변경
-app.get('/type/:id', function(req, res) {
-  let clauseType = req.params.id; //선택된 테이블값 전역변수에 저장
-  let sql = "SELECT * FROM basics WHERE type=? AND title!=''";
-  let params = [clauseType];
-  conn.query(sql, params, function(err, rows){
-    if(err) throw err;
-    res.render('clause.ejs', {data:rows});
-  })
-})  
 
