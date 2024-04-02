@@ -15,7 +15,17 @@ conn.connect();
 
 //메인 페이지
 router.get('/', function(req, res) {
-  res.render('index.ejs');
+  res.render('index.ejs', {user:req.session.user});
+})
+
+//로그인 페이지
+router.get('/login', function(req, res) {
+  res.render('login.ejs', {user:req.session.user});
+})
+
+//회원가입 페이지
+router.get('/signup', function(req, res) {
+  res.render('signup.ejs', {user:req.session.user});
 })
 
 //특약사항 페이지
@@ -24,7 +34,7 @@ router.get('/clause', function(req, res){
   let params = "apt_trade";
   conn.query(sql, params, function(err, rows) {
     if(err) throw err;
-    res.render('clause.ejs', {data:rows});
+    res.render('clause.ejs', {data:rows, user:req.session.user});
   })
 });
 
@@ -35,7 +45,7 @@ router.get('/type/:id', function(req, res) {
   let params = [clauseType];
   conn.query(sql, params, function(err, rows){
     if(err) throw err;
-    res.render('clause.ejs', {data:rows});
+    res.render('clause.ejs', {data:rows, user:req.session.user});
   })
 }) 
 

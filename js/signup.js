@@ -31,7 +31,7 @@ function checkSignup() {
           alert("이미 존재하는 아이디 입니다");
         else if(data[0] == "가입성공") {
           alert("정상적으로 회원가입 되었습니다.");
-          window.location.href = '/';
+          window.location.href = '/login';
         }
       }
     })

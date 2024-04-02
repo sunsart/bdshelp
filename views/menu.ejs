@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="../css/menu.css">  
-  
+
 <div class="inner">
   <a href="/" class="logo">
     <img src="../images/logo.png">
@@ -8,7 +7,12 @@
   <div class="sub-menu">
     <ul class="menu">
       <li><a href="/">홈으로</a></li>
-      <li><a href="/html/login.html">로그인</a></li>
+
+      <% if (user) { %>
+        <li><a href="/logout">로그아웃</a></li>
+      <% } else { %>
+        <li><a href="/login">로그인</a></li>
+      <% } %>
     </ul>
   </div>
 

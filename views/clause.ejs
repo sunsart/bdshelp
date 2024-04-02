@@ -12,19 +12,15 @@
   <!-- Clipboardl.js 라이브러리 사용 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
 
-  <!-- 제이쿼리 사용하여 header, footer를 include  -->
+  <!-- 제이쿼리 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="text/javascript">   
-    $(document).ready(function() {
-      $("#headers").load("../html/menu.html");
-    });
-  </script>
-
+  
   <!-- css 링크  -->
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/clause.css">
   <link rel="stylesheet" href="../css/dropdown.css">
   <link rel="stylesheet" href="../css/table.css">
+  <link rel="stylesheet" href="../css/menu.css">
 
   <!-- JS 링크 -->
   <script src="../js/dropdown.js"></script>
@@ -35,7 +31,9 @@
 <body>
 
   <!-- ===== Header ===== -->
-  <header id="headers"></header>
+  <header>
+    <%- include('menu', {user:user}) %>
+  </header>
 
   <!-- ===== 드롭다운바 ===== -->
   <div class="navibar">

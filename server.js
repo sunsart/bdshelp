@@ -1,7 +1,7 @@
 //.env 환경변수 사용
 const dotenv = require('dotenv').config();
 
-//nodejs 와 mysql 접속
+//nodejs 와 mysql 접속, auth, list ??
 const mysql = require('mysql');
 const conn = mysql.createConnection({
   host: process.env.HOST,
@@ -13,6 +13,28 @@ conn.connect();
 
 const express = require('express');
 const app = express();
+
+//----------세션 미들웨어 설정----------
+//사용자마다 고유한 req.session 객체가 생성됨
+let session = require('express-session');
+let mysqlstore = require('express-mysql-session')(session);
+let option = {
+  host: process.env.HOST,
+  port: process.env.PORT,
+  user: process.env.USER,
+  password: process.env.PASS,
+  database: process.env.DATABASE
+}
+let sessionStore = new mysqlstore(option);
+
+app.use(session({
+  secret : process.env.SESSION_SECRET,
+  resave : false,
+  saveUninitialized : true,
+  store : sessionStore,
+  cookie : { maxAge: 3600000 }  //1시간
+}))
+//---------------------------------------
 
 //post방식의 데이터 사용을 위한 body-parser 설정
 const bodyParser = require('body-parser');

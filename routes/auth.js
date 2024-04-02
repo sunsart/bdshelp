@@ -54,12 +54,20 @@ router.post('/login', function(req, res){
       req.session.user.name = result[0].name; //회원 아이디
       req.session.save(function() {
         res.send("로그인성공"); 
+        //res.render('login.ejs', {data:rows, user:req.session.user});
       })
     } else {
       res.send("로그인실패");    
     }
   })
 });
+
+//로그아웃 라우터
+router.get('/logout', function(req, res) {
+  req.session.destroy(function() {
+    res.redirect('/');
+  })
+})
 
 //router 변수를 외부 노출
 module.exports = router;

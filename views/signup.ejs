@@ -9,17 +9,13 @@
   <!-- 브라우저 css 기본스타일 초기화 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
 
-  <!-- 제이쿼리 사용하여 header, footer를 include  -->
+  <!-- 제이쿼리 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="text/javascript">   
-    $(document).ready(function() {
-      $("#headers").load("./menu.html");
-    });
-  </script>
 
   <!-- css 링크  -->
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/signup.css">
+  <link rel="stylesheet" href="../css/menu.css">
 
   <!-- JS 링크 -->
   <script src="../js/signup.js"></script>
@@ -27,7 +23,9 @@
 <body>
 
   <!-- ===== Header ===== -->
-  <header id="headers"></header>
+  <header>
+    <%- include('menu', {user:user}) %>
+  </header>
 
   <div class="signup-box">
     <form action="#">
@@ -57,7 +55,6 @@
       </div>
     
       <div class="signup-add">
-        <!-- <a href="http://127.0.0.1/8080">홈으로</a>  -->
         <a href="/">홈으로</a>
       </div>
     </form>
