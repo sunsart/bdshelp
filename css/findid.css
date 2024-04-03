@@ -74,11 +74,9 @@ hr {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-
   margin-bottom: 25px;
 }
 
-/* 아이디찾기 버튼, 취소 버튼 */
 .findid-btn {
   background-color: #04AA6D;
   color: white;

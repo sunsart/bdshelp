@@ -37,3 +37,65 @@ $(document).ready(function() {
 		});
 	})
 });
+
+//로그인후 >> 테이블 위쪽 수정버튼 클릭
+$(document).ready(function() {
+  $('#edit-button').click(function(e) {
+		if (this.innerText == "수정") {
+			this.innerText = "완료";
+			//선택버튼 활성화
+			let btns = document.querySelectorAll(".select-btn");
+			for(let btn of btns)
+				btn.className = "select-btn show-btn";
+			//체크박스 비활성화
+			let checkboxes = document.querySelectorAll(".checkbox");
+			for(let cb of checkboxes)
+				cb.style.visibility = 'hidden';
+			//선택버튼 활성화시 칼럼 사이즈 늘리기
+			let td = document.getElementById("col-size");
+			td.style.width = '15%';
+		} 
+		else if (this.innerText == "완료") {
+			this.innerText = "수정";
+			//선택버튼 비활성화
+			let btns = document.querySelectorAll(".select-btn");
+			for(let btn of btns)
+				btn.className = "select-btn";
+			//체크박스 활성화
+			let checkboxes = document.querySelectorAll(".checkbox");
+			for(let cb of checkboxes)
+				cb.style.visibility = 'visible';
+			//선택버튼 비활성화시 칼럼 사이즈 복원
+			let td = document.getElementById("col-size");
+			td.style.width = '12%';
+		}
+	})	
+});
+
+//로그인후 >> 테이블 수정버튼 >> 선택버튼 클릭 >> 모달뷰
+function clickEdit(e) {
+	//선택한 특약의 id넘버 가져오기
+	num = e.dataset.id;
+
+	//list.js 에서 사용됨
+	//let contract_no = document.querySelector("#contract_no");
+	//contract_no.value = num;
+
+	//선택된행의 데이터를 모달입력창에 설정
+	let title;
+	let content;
+	let checkboxes = document.querySelectorAll(".checkbox");
+	for (let i=0; i<checkboxes.length; i++) {
+		if (checkboxes[i].dataset.id == num) {
+			title = document.querySelectorAll(".title")[i].innerText;
+			content = document.querySelectorAll(".content")[i].innerText;
+			break;
+		} 
+	}
+	document.querySelector(".edit-title").value = title;
+	document.querySelector(".edit-content").value = content;
+	
+	//모달 show
+	let modal = document.getElementById("edit-modal");
+	modal.style.display = "block";
+}

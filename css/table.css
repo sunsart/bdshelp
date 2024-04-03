@@ -5,9 +5,10 @@
 .table-clause, td {
   border: 1px solid black;
   border-collapse: collapse;
+  vertical-align: middle;
 }
 
-.table-clause-content {
+.content {
   color: darkgray;
   padding-left: 15px;
 }
