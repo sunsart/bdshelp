@@ -46,7 +46,7 @@ router.post('/signup', async function(req, res, next) {
 
 //로그인 라우터
 router.post('/login', function(req, res){
-  let username = req.body.id;
+  let username = req.body.name;
   let userpw = sha(req.body.pw);
   const sql = "SELECT * FROM account WHERE name = ? AND pw = ?";
   conn.query(sql, [username, userpw], function(err, result, fields) {
@@ -57,7 +57,6 @@ router.post('/login', function(req, res){
       req.session.user.name = result[0].name; //회원 아이디
       req.session.save(function() {
         res.send("로그인성공"); 
-        //res.render('login.ejs', {data:rows, user:req.session.user});
       })
     } else {
       res.send("로그인실패");    

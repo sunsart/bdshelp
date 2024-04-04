@@ -74,12 +74,11 @@ $(document).ready(function() {
 
 //로그인후 >> 테이블 수정버튼 >> 선택버튼 클릭 >> 모달뷰
 function clickEdit(e) {
-	//선택한 특약의 id넘버 가져오기
+	//선택한 basics 특약 id넘버 가져오기
 	num = e.dataset.id;
 
-	//list.js 에서 사용됨
-	//let contract_no = document.querySelector("#contract_no");
-	//contract_no.value = num;
+	//list.js 에서 사용됨 (hidden 화면에서 보이지 않음)
+	document.querySelector("#clause-no").value = num;
 
 	//선택된행의 데이터를 모달입력창에 설정
 	let title;
@@ -96,6 +95,5 @@ function clickEdit(e) {
 	document.querySelector(".edit-content").value = content;
 	
 	//모달 show
-	let modal = document.getElementById("edit-modal");
-	modal.style.display = "block";
+	document.getElementById("edit-modal").style.display = "block";
 }
