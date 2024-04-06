@@ -20,7 +20,7 @@ function confirmModal() {
   closeModal();
 
   //특약수정된 결과 바로 볼수 있게
-  //window.location.href = '/';
+  window.location.href = '/clause';
 }
 
 //모달 내 취소버튼 클릭시

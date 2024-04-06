@@ -77,7 +77,7 @@ function clickEdit(e) {
 	//선택한 basics 특약 id넘버 가져오기
 	num = e.dataset.id;
 
-	//list.js 에서 사용됨 (hidden 화면에서 보이지 않음)
+	//list.js 에서 사용됨 (type="hidden" 화면에서 보이지 않음)
 	document.querySelector("#clause-no").value = num;
 
 	//선택된행의 데이터를 모달입력창에 설정
