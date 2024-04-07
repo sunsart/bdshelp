@@ -21,7 +21,7 @@ $(document).ready(function() {
 		let contentStr = "";
 		for (let i=0; i<$('.checkbox').length; i++) {
 			if ($('.checkbox')[i].checked == true){
-				contentStr += $('.table-clause-content')[i].innerText;
+				contentStr += $('.content')[i].innerText;
 				contentStr += "\n";
 			}
 		}
