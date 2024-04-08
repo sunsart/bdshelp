@@ -121,7 +121,7 @@ router.post('/edit', function(req, res) {
       let params = [type, title, content, account_id, clause_id];
       conn.query(sql, params, function(err, result) {
         if(err) throw err;
-        res.send('특약저장성공');
+        res.send("특약저장성공");
       })
     }
   })
