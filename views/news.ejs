@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부동산 도우미 - 뉴스 페이지</title>
+  <meta name="description" content="부동산 도우미 웹사이트는 부동산 사무실 대표님들의 업무에 도움이 되고자 합니다">
+
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+
+  <!-- 제이쿼리 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- The Open Graph Protocal -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="부동산 도우미">
+  <meta property="og:title" content="부동산 도우미 웹사이트">
+  <meta property="og:description" content="부동산 도우미는 부동산 중개업소를 운영하는 대표님들의 업무에 도움을 주는 웹사이트 입니다">
+  <meta property="og:image" content="./images/for_seo.jpg">
+  <meta property="og:url" content="">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="../css/news.css">
+  <link rel="stylesheet" href="../css/footer.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <%- include('menu', {user:user}) %>
+  </header>
+  
+  <div class="cards">
+    <div class="card">
+      <a href="<%= data[0].url %>" target="_blank">
+        <p class="title"><%= data[0].title %></p> 
+      </a>
+      <a href="<%= data[0].url %>" target="_blank">
+        <p class="content"><%= data[0].summary %></p> 
+      </a>
+      <p class="press"><%= data[0].press %></p> 
+    </div>
+  
+    <div class="card">
+      <a href="<%= data[1].url %>" target="_blank">
+        <p class="title"><%= data[1].title %></p> 
+      </a>
+      <a href="<%= data[1].url %>" target="_blank">
+        <p class="content"><%= data[1].summary %></p> 
+      </a>
+      <p class="press"><%= data[1].press %></p> 
+    </div>
+
+    <div class="card">
+      <a href="<%= data[2].url %>" target="_blank">
+        <p class="title"><%= data[2].title %></p> 
+      </a>
+      <a href="<%= data[2].url %>" target="_blank">
+        <p class="content"><%= data[2].summary %></p> 
+      </a>
+      <p class="press"><%= data[2].press %></p> 
+    </div>
+
+    <div class="card">
+      <a href="<%= data[3].url %>" target="_blank">
+        <p class="title"><%= data[3].title %></p> 
+      </a>
+      <a href="<%= data[3].url %>" target="_blank">
+        <p class="content"><%= data[3].summary %></p> 
+      </a>
+      <p class="press"><%= data[3].press %></p> 
+    </div>
+  </div>
+  
+
+  <table class="table-news">
+    <% for(let i=0; i<data.length; i++) { %>
+      <tr>
+        <td>
+          <label class="table-title"> <%= data[i].title %> </label> 
+        </td>
+        <td>
+          <label class="table-press"> <%= data[i].press %></label> 
+        </td>
+      </tr> 
+    <% } %> 
+  </table>
+
+  <!--문의 하기-->
+  <footer class="footer">
+    <p>Copyright 2024. All rights reserved.</p>
+    <br>
+    <p>현재 경기도에서 공인중개사로 일하고 있습니다.</p>
+    <p>일하면서 필요해서 만든 사이트인데, 다른 중개사분들께 도움이 될까해서 공개합니다.</p>
+    <p>수정할 부분이나 건의할 내용이 있으면 언제든 환영합니다.</p>
+    <p>문의하기 <a id="email_address">sunsart7@naver.com</a> </p>
+    <br>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+.footer {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+.footer p{
+  font-size : 15px;
+  line-height: 140%;
+  color: rgb(105, 105, 105);
+}
+
+#email_address {
+  color: rgb(67, 62, 234);
+}
