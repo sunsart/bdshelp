@@ -32,14 +32,23 @@ router.post('/qna_post', function(req, res) {
   let content = req.body.content;
   let user_id = req.session.user.id;
   let user_name = req.session.user.name;
+  let post_date = postDate();
 
-  let sql = "INSERT INTO qna (title, content, user_id, user_name, created_at) VALUES (?, ?, ?, ?, curdate())";
-  let params = [title, content, user_id, user_name];
+  let sql = "INSERT INTO qna (title, content, user_id, user_name, created_at) VALUES (?, ?, ?, ?, ?)";
+  let params = [title, content, user_id, user_name, post_date];
   conn.query(sql, params, function(err, result) {
     if(err) throw err;
     res.send("게시물작성성공");
   })
 })
+
+function postDate() {
+  const today = new Date();
+  const year = today.toLocaleDateString('en-US', {year: 'numeric',});
+  const month = today.toLocaleDateString('en-US', {month: '2-digit',});
+  const day = today.toLocaleDateString('en-US', {day: '2-digit',});
+  return `${year}-${month}-${day}`;
+}
 
 //router 변수를 외부 노출
 module.exports = router;

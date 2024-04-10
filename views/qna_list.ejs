@@ -26,25 +26,28 @@
     <%- include('menu', {user:user}) %>
   </header>
 
-	<h2>질문 답변 게시판</h2>
+	<div class="board-name">
+    <span>질문답변 게시판</span>
+  </div>
+	
 	<div class="container">
 		<table>
 			<thead>
 				<tr>
-					<th style="width: 60%;">제목</th>
-					<th style="width: 15%;">작성자</th>
-					<th style="width: 15%;">작성일</th>
-					<th style="width: 10%;">조회수</th>
+					<th style="width: 70%;">제목</th>
+					<th style="width: 12%;">작성자</th>
+					<th style="width: 10%;">작성일</th>
+					<th style="width: 8%;">조회수</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<% for(let i=0; i<data.length; i++) { %>
 					<tr>
-						<td><label> <%= data[i].title %> </label></td>
-						<td><label> <%= data[i].user_name %> </label></td>
-						<td><label> <%= data[i].created_at %> </label></td>
-						<td><label> <%= data[i].hit %> </label></td>
+						<td class="td-title"><label> <%= data[i].title %> </label></td>
+						<td class="td-center"><label> <%= data[i].user_name %> </label></td>
+						<td class="td-center"><label> <%= data[i].created_at %> </label></td>
+						<td class="td-center"><label> <%= data[i].hit %> </label></td>
 					</tr> 
 				<% } %>
 			</tbody>
@@ -52,7 +55,11 @@
 	</div>
 
 	<div style="text-align: center;">
-		<input type="button" class="writh-button" value="글쓰기" onclick="location.href='./qna_write'">
+		<% if (user) { %>
+			<button class="write-button" style="visibility:visible;" onclick="location.href='./qna_write'">글쓰기</button>
+		<% } else { %>
+			<button class="write-button" style="visibility:hidden;" onclick="location.href='./qna_write'">글쓰기</button>
+		<% } %>
 	</div>
 	
 </body>

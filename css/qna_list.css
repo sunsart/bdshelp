@@ -1,12 +1,13 @@
-h2 {
+.board-name {
+  margin-top: 40px;
+  font-size: 20px;
   text-align: center;
-  padding: 20px 0;
 }
 
 table { 
   line-height: 40px; 
   width: 70%;
-  margin : 10px auto;
+  margin : 40px auto;
 }
 
 table, th, td { 
@@ -15,11 +16,15 @@ table, th, td {
   vertical-align: middle;
 }
 
-#col-size {
-  width: 60%;
+.td-title {
+  padding-left: 10px;
 }
 
-.writh-button {
+.td-center {
+  text-align: center;
+}
+
+.write-button {
   border: none; 
   color: white; 
   padding: 10px 20px; 
@@ -27,6 +32,6 @@ table, th, td {
   background-color: #04AA6D;
 }
 
-.writh-button:hover {
+.write-button:hover {
   background-color: #46a049;
 }
