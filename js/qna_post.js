@@ -1,7 +1,10 @@
 //
-function insertQna() {
+function postQna() {
+  let title = document.getElementById("title").value;
+  let content = document.getElementById("content").value;
+
   $.ajax({
-    url : "/qna_write",
+    url : "/qna_post",
     type : "POST",
     data : {title:title, content:content},
     success : function(data) {
