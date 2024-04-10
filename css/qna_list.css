@@ -1,0 +1,32 @@
+h2 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+table { 
+  line-height: 40px; 
+  width: 70%;
+  margin : 10px auto;
+}
+
+table, th, td { 
+  border: 1px solid darkgray; 
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+#col-size {
+  width: 60%;
+}
+
+.writh-button {
+  border: none; 
+  color: white; 
+  padding: 10px 20px; 
+  cursor: pointer;
+  background-color: #04AA6D;
+}
+
+.writh-button:hover {
+  background-color: #46a049;
+}

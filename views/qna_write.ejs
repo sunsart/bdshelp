@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부동산 도우미 - 질문답변 게시판 리스트 페이지</title>
+  <meta name="description" content="부동산 도우미 웹사이트는 부동산 계약 특약사항 작성에 도움을 드립니다">
+
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+  
+	<!-- 제이쿼리 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="../css/qna_write.css">
+
+  <!-- JS 링크 -->
+</head>
+<body>
+
+	<!-- ===== Header ===== -->
+  <header>
+    <%- include('menu', {user:user}) %>
+  </header>
+
+  <div class="board-name">
+    <span>질문답변 게시판</span>
+  </div>
+
+  <div class="container">
+    <input type="text" name="title" placeholder="제목을 입력하세요.">
+      
+    <textarea name="content" placeholder="내용을 입력하세요."></textarea>
+  </div>
+
+  <div class="submit-btn">
+    <input type="button" value="등록" onclick="insertQna()">
+  </div>
+
+</body>
+</html>

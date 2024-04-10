@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부동산 도우미 - 질문답변 게시판 리스트 페이지</title>
+  <meta name="description" content="부동산 도우미 웹사이트는 부동산 계약 특약사항 작성에 도움을 드립니다">
+
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+  
+	<!-- 제이쿼리 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/menu.css">
+	<link rel="stylesheet" href="../css/qna_list.css">
+
+  <!-- JS 링크 -->
+</head>
+<body>
+
+	<!-- ===== Header ===== -->
+  <header>
+    <%- include('menu', {user:user}) %>
+  </header>
+
+	<h2>질문 답변 게시판</h2>
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th style="width: 60%;">제목</th>
+					<th style="width: 15%;">작성자</th>
+					<th style="width: 15%;">작성일</th>
+					<th style="width: 10%;">조회수</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% for(let i=0; i<data.length; i++) { %>
+					<tr>
+						<td><label> <%= data[i].title %> </label></td>
+						<td><label> <%= data[i].user_name %> </label></td>
+						<td><label> <%= data[i].hit %> </label></td>
+						<td><label> <%= data[i].created_at %> </label></td>
+					</tr> 
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: center;">
+		<input type="button" class="writh-button" value="글쓰기" onclick="location.href='/qna_write'">
+	</div>
+	
+</body>
+</html>
