@@ -44,10 +44,10 @@
 			<tbody>
 				<% for(let i=0; i<data.length; i++) { %>
 					<tr>
-						<td class="td-title"><label> <%= data[i].title %> </label></td>
-						<td class="td-center"><label> <%= data[i].user_name %> </label></td>
-						<td class="td-center"><label> <%= data[i].created_at %> </label></td>
-						<td class="td-center"><label> <%= data[i].hit %> </label></td>
+						<td class="td-title"> <a href="/qna_detail/<%= data[i].id %>"><%= data[i].title %></a> </td>
+						<td class="td-center"> <label><%= data[i].user_name %></label> </td>
+						<td class="td-center"> <label><%= data[i].created_at %></label> </td>
+						<td class="td-center"> <label><%= data[i].hit %></label> </td>
 					</tr> 
 				<% } %>
 			</tbody>

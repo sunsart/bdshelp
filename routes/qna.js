@@ -14,8 +14,8 @@ conn.connect();
 //-----------------------------------------//
 
 //질문답변 리스트
-router.get('/qna', function(req, res) {
-  let sql = "SELECT title, user_name, hit, created_at FROM qna";
+router.get('/qna_list', function(req, res) {
+  let sql = "SELECT id, title, user_name, hit, created_at FROM qna ORDER BY id DESC";
   conn.query(sql, function(err, rows) {
     if(err) throw err;
     res.render('qna_list.ejs', {data:rows, user:req.session.user});
@@ -25,6 +25,16 @@ router.get('/qna', function(req, res) {
 //질문답변 게시물등록 페이지
 router.get('/qna_write', function(req, res) {
   res.render('qna_write.ejs', {user:req.session.user});
+})
+
+//질문답변 게시물 내용보기 페이지
+router.get('/qna_detail/:id', function(req, res) {
+  let sql = "SELECT title, content FROM qna WHERE id=?";
+  let params = req.params.id;
+  conn.query(sql, params, function(err, rows) {
+    if(err) throw err;
+    res.render('qna_detail.ejs', {data:rows, user:req.session.user});
+  })
 })
 
 router.post('/qna_post', function(req, res) {

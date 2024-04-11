@@ -39,6 +39,7 @@
     <%- include('menu', {user:user}) %>
   </header>
   
+  <!-- News Cards -->
   <div class="cards">
     <div class="card">
       <a href="<%= data[0].url %>" target="_blank">
@@ -47,7 +48,8 @@
       <a href="<%= data[0].url %>" target="_blank">
         <p class="content"><%= data[0].summary %></p> 
       </a>
-      <p class="press"><%= data[0].press %></p> 
+      <span class="press"> <%= data[0].press %> - </span>
+      <span class="date"> <%= data[0].date %> </span>
     </div>
   
     <div class="card">
@@ -57,7 +59,8 @@
       <a href="<%= data[1].url %>" target="_blank">
         <p class="content"><%= data[1].summary %></p> 
       </a>
-      <p class="press"><%= data[1].press %></p> 
+      <span class="press"> <%= data[1].press %> - </span>
+      <span class="date"> <%= data[1].date %> </span>
     </div>
 
     <div class="card">
@@ -67,7 +70,8 @@
       <a href="<%= data[2].url %>" target="_blank">
         <p class="content"><%= data[2].summary %></p> 
       </a>
-      <p class="press"><%= data[2].press %></p> 
+      <span class="press"> <%= data[2].press %> - </span>
+      <span class="date"> <%= data[2].date %> </span> 
     </div>
 
     <div class="card">
@@ -77,19 +81,24 @@
       <a href="<%= data[3].url %>" target="_blank">
         <p class="content"><%= data[3].summary %></p> 
       </a>
-      <p class="press"><%= data[3].press %></p> 
+      <span class="press"> <%= data[3].press %> - </span>
+      <span class="date"> <%= data[3].date %> </span> 
     </div>
   </div>
   
-
+  <!-- News Table -->
   <table class="table-news">
     <% for(let i=0; i<data.length; i++) { %>
       <tr>
         <td>
-          <label class="table-title"> <%= data[i].title %> </label> 
+          <a class="table-title" href="<%= data[i].url %>" target="_blank"> 
+            <%= data[i].title %>
+          </a>
         </td>
         <td>
-          <label class="table-press"> <%= data[i].press %></label> 
+          <a class="table-press" href="<%= data[i].url %>" target="_blank">
+            <%= data[i].press %> - <%= data[i].date %>
+          </a>
         </td>
       </tr> 
     <% } %> 

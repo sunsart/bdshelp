@@ -20,6 +20,10 @@ table, th, td {
   padding-left: 10px;
 }
 
+.td-title a:link {
+  color: black;
+}
+
 .td-center {
   text-align: center;
 }
