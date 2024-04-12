@@ -9,7 +9,7 @@
       <li><a href="/">홈으로</a></li>
 
       <% if (user) { %>
-        <li><a href="/logout">로그아웃</a></li>
+        <li><a href="/logout"><%= user.name %> 님, 환영합니다 [로그아웃]</a></li>
       <% } else { %>
         <li><a href="/login">로그인</a></li>
       <% } %>

@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="../css/qna_detail.css">
 
   <!-- JS 링크 -->
-  <!-- <script src="../js/qna_post.js"></script> -->
+  <script src="../js/qna_write.js"></script>
 </head>
 <body>
 
@@ -31,36 +31,48 @@
     <span>질문답변 게시판</span>
   </div>
 
+  <!-- ===== 질문답변 ===== -->
   <div class="container">
-    <input type="text" id="title" value="<%= data[0].title %>" disabled>
-      
-    <textarea id="content" disabled><%= data[0].content %></textarea>
-  </div>
+    <input type="text" id="qna-id" value="<%= data[0].id %>" hidden>
 
-  <!-- ===== 댓글 ===== -->
-  <div class="comment-container">
-		<table class="comment-table">
+    <input type="text" id="title" value="<%= data[0].title %>" disabled>
+
+    <textarea id="content" disabled><%= data[0].content %></textarea>
+
+    <input type="button" name="list" value="목록" onClick="location.href='/qna_list'"">
+
+    <table class="comment">
       <% for(let i=0; i<data.length; i++) { %>
         <tr>
           <td> 
-            <p class="comment-row-1">회원 이름</p>
-            <p class="comment-row-2">댓글 내용은 이러이러합니다.</p>
-            <p class="comment-row-3">2024.4.11. 13:15</p>
+            <p class="comment-row-1"><%= data[i].user_name %></p>
+            <p class="comment-row-2"><%= data[i].comment %></p>
+            <p class="comment-row-3"><%= data[i].created_at %></p>
+            <br>
           </td>
         </tr> 
       <% } %>
-		</table>
-	</div>
-
-  <div class="comment-box">
-    <label class="username" for=""> <%= user.name %> </label>
-    <textarea class="comment" placeholder="댓글을 남겨보세요."></textarea>
-    <input type="button" name="comment" value="등록" onClick="">
+    </table>
   </div>
 
-  <div class="submit-btn">
-    <input type="button" name="list" value="목록" onClick="location.href='/qna_list'"">
-  </div>
+
+  <% if (user) { %>
+    <div class="comment-box">
+      <textarea class="comment" id="comment-content" placeholder="댓글을 남겨보세요."></textarea>
+      <input type="button" name="comment" value="등록" onClick="postComment()">
+    </div>
+  <% } else { %>
+    <div class="comment-box">
+      <textarea class="comment" id="comment-content" placeholder="회원가입하시고 댓글을 남겨보세요." disabled></textarea>
+      <input type="button" name="comment" value="등록" onClick="postComment()" hidden>
+    </div>
+  <% } %>
+
+  <!-- ===== 댓글입력창 ===== -->
+  <!-- <div class="comment-box">
+    <textarea class="comment" id="comment-content" placeholder="댓글을 남겨보세요."></textarea>
+    <input type="button" name="comment" value="등록" onClick="postComment()">
+  </div> -->
 
 </body>
 </html>

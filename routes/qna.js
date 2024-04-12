@@ -28,8 +28,21 @@ router.get('/qna_write', function(req, res) {
 })
 
 //질문답변 게시물 내용보기 페이지
+// router.get('/qna_detail/:id', function(req, res) {
+//   let sql = "SELECT title, content FROM qna WHERE id=?";
+//   let params = req.params.id;
+//   conn.query(sql, params, function(err, rows) {
+//     if(err) throw err;
+//     res.render('qna_detail.ejs', {data:rows, user:req.session.user});
+//   })
+// })
+
+//질문답변 게시물내용 & 댓글 페이지
 router.get('/qna_detail/:id', function(req, res) {
-  let sql = "SELECT title, content FROM qna WHERE id=?";
+  let sql = " SELECT q.id, q.title, q.content, c.comment, c.user_id, c.user_name, c.created_at \
+              FROM qna AS q LEFT OUTER JOIN comments AS c \
+              ON q.id = c.qna_id \
+              WHERE q.id = ? ";
   let params = req.params.id;
   conn.query(sql, params, function(err, rows) {
     if(err) throw err;
@@ -49,6 +62,21 @@ router.post('/qna_post', function(req, res) {
   conn.query(sql, params, function(err, result) {
     if(err) throw err;
     res.send("게시물작성성공");
+  })
+})
+
+router.post('/qna_comment_post', function(req, res) {
+  let comment = req.body.comment;
+  let qna_id = req.body.qna_id;
+  let user_id = req.session.user.id;
+  let user_name = req.session.user.name;
+  let post_date = postDate();
+
+  let sql = "INSERT INTO comments (comment, qna_id, user_id, user_name, created_at) VALUES (?, ?, ?, ?, ?)";
+  let params = [comment, qna_id, user_id, user_name, post_date];
+  conn.query(sql, params, function(err, result) {
+    if(err) throw err;
+    res.send("댓글작성성공");
   })
 })
 
