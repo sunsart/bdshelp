@@ -13,9 +13,14 @@ conn.connect();
 
 //-----------------------------------------//
 
-//질문답변 리스트
+//질문답변 리스트 (스칼라 서브쿼리 성능문제로 차후 left join 방식으로 변경 필요)
 router.get('/qna_list', function(req, res) {
-  let sql = "SELECT id, title, user_name, hit, created_at FROM qna ORDER BY id DESC";
+  let sql = " SELECT id, title, user_name, hit, created_at, ( \
+                SELECT count(*) \
+                FROM comments AS c \
+                WHERE c.qna_id = q.id) AS commentCount \
+              FROM qna AS q \
+              ORDER BY id DESC";
   conn.query(sql, function(err, rows) {
     if(err) throw err;
     res.render('qna_list.ejs', {data:rows, user:req.session.user});
@@ -27,19 +32,10 @@ router.get('/qna_write', function(req, res) {
   res.render('qna_write.ejs', {user:req.session.user});
 })
 
-//질문답변 게시물 내용보기 페이지
-// router.get('/qna_detail/:id', function(req, res) {
-//   let sql = "SELECT title, content FROM qna WHERE id=?";
-//   let params = req.params.id;
-//   conn.query(sql, params, function(err, rows) {
-//     if(err) throw err;
-//     res.render('qna_detail.ejs', {data:rows, user:req.session.user});
-//   })
-// })
 
 //질문답변 게시물내용 & 댓글 페이지
 router.get('/qna_detail/:id', function(req, res) {
-  let sql = " SELECT q.id, q.title, q.content, c.comment, c.user_id, c.user_name, c.created_at \
+  let sql = " SELECT q.id, q.title, q.content, q.user_id, c.comment, c.user_name, c.created_at \
               FROM qna AS q LEFT OUTER JOIN comments AS c \
               ON q.id = c.qna_id \
               WHERE q.id = ? ";
@@ -50,6 +46,19 @@ router.get('/qna_detail/:id', function(req, res) {
   })
 })
 
+//질문답변 edit 페이지
+router.get('/qna_edit/:id', function(req, res) {
+  let sql = " SELECT id, title, content \
+              FROM qna \
+              WHERE id = ? ";
+  let params = req.params.id;
+  conn.query(sql, params, function(err, rows) {
+    if(err) throw err;
+    res.render('qna_edit.ejs', {data:rows, user:req.session.user});
+  })
+})
+
+//게시물 쓰기 라우터
 router.post('/qna_post', function(req, res) {
   let title = req.body.title;
   let content = req.body.content;
@@ -65,6 +74,7 @@ router.post('/qna_post', function(req, res) {
   })
 })
 
+//댓글 쓰기 라우터
 router.post('/qna_comment_post', function(req, res) {
   let comment = req.body.comment;
   let qna_id = req.body.qna_id;

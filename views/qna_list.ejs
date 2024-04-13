@@ -44,7 +44,12 @@
 			<tbody>
 				<% for(let i=0; i<data.length; i++) { %>
 					<tr>
-						<td class="td-title"> <a href="/qna_detail/<%= data[i].id %>"><%= data[i].title %></a> </td>
+						<% if(data[i].commentCount > 0) { %>
+							<td class="td-title"><a href="/qna_detail/<%= data[i].id %>"><%= data[i].title %> <span id="count-color">(<%=data[i].commentCount%>)</span></a></td>
+						<% } else { %>
+							<td class="td-title"><a href="/qna_detail/<%= data[i].id %>"><%= data[i].title %></a></td>
+						<% } %>
+
 						<td class="td-center"> <label><%= data[i].user_name %></label> </td>
 						<td class="td-center"> <label><%= data[i].created_at %></label> </td>
 						<td class="td-center"> <label><%= data[i].hit %></label> </td>

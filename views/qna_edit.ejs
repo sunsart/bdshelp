@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>부동산 도우미 - 질문답변 게시판 디테일 페이지</title>
+  <title>부동산 도우미 - 질문답변 게시판 edit 페이지</title>
   <meta name="description" content="부동산 도우미 웹사이트는 부동산 계약 특약사항 작성에 도움을 드립니다">
 
   <!-- 브라우저 css 기본스타일 초기화 -->
@@ -15,7 +15,7 @@
   <!-- css 링크  -->
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/menu.css">
-  <link rel="stylesheet" href="../css/qna_detail.css">
+  <link rel="stylesheet" href="../css/qna_edit.css">
 
   <!-- JS 링크 -->
   <script src="../js/qna_write.js"></script>
@@ -33,21 +33,12 @@
 
   <!-- 질문답변 -->
   <div class="container">
-    <input type="text" id="qna-id" value="<%= data[0].id %>" hidden>
 
-    <input type="text" id="title" value="<%= data[0].title %>" disabled>
+    <input type="text" id="title" value="<%= data[0].title %>">
 
-    <textarea id="content" disabled><%= data[0].content %></textarea>
+    <textarea id="content"><%= data[0].content %></textarea>
 
-    <div>
-      <input type="button" name="list" value="목록" onClick="location.href='/qna_list'">
-
-      <% if (user && user.id == data[0].user_id ) { %>
-        <input type="button" name="edit" value="수정" onClick="location.href='/qna_edit/<%= data[0].id %>'">
-      <% } %>
-    </div>
-
-
+    <input type="button" name="edit" value="수정완료" onClick="">
 
     <table class="comment">
       <% for(let i=0; i<data.length; i++) { %>
@@ -62,19 +53,6 @@
       <% } %>
     </table>
   </div>
-
-  <!-- 댓글 입력창 -->
-  <% if (user) { %>
-    <div class="comment-box">
-      <textarea class="comment" id="comment-content" placeholder="댓글을 남겨보세요."></textarea>
-      <input type="button" name="comment" value="등록" onClick="postComment()">
-    </div>
-  <% } else { %>
-    <div class="comment-box">
-      <textarea class="comment" id="comment-content" placeholder="회원가입하시고 댓글을 남겨보세요." disabled></textarea>
-      <input type="button" name="comment" value="등록" onClick="postComment()" hidden>
-    </div>
-  <% } %>
 
 </body>
 </html>

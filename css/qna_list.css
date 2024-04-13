@@ -24,6 +24,14 @@ table, th, td {
   color: black;
 }
 
+.td-title a:visited {
+  color: black;
+}
+
+#count-color {
+  color: red;
+}
+
 .td-center {
   text-align: center;
 }
