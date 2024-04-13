@@ -27,6 +27,7 @@ router.get('/qna_list', function(req, res) {
   })
 })
 
+
 //질문답변 게시물등록 페이지
 router.get('/qna_write', function(req, res) {
   res.render('qna_write.ejs', {user:req.session.user});
@@ -34,7 +35,22 @@ router.get('/qna_write', function(req, res) {
 
 
 //질문답변 게시물내용 & 댓글 페이지
-router.get('/qna_detail/:id', function(req, res) {
+router.get('/qna_detail/:id', async function(req, res) {
+  // 쿠키에 저장되어있는 값이 있는지 확인 (없을시 undefined 반환)
+  if (req.cookies[req.params.id] == undefined) {
+    // key, value, 옵션을 설정해준다.
+    res.cookie(req.params.id, getUserIP(req), {
+      // 유효시간 : 1분  **테스트용 1분 / 출시용 1시간 3600000  
+      maxAge: 60000
+    })
+    // 쿠키에 저장값이 없으면 조회수 1 증가
+    let sql = "UPDATE qna SET hit=qna.hit+1 WHERE id=?";
+    let params = [req.params.id];
+    conn.query(sql, params, function(err, result) {
+      if(err) throw err;
+    })
+  }
+  //쿠키에 저장값이 있으면 조회수 증가하지 않음
   let sql = " SELECT q.id, q.title, q.content, q.user_id, c.comment, c.user_name, c.created_at \
               FROM qna AS q LEFT OUTER JOIN comments AS c \
               ON q.id = c.qna_id \
@@ -45,6 +61,7 @@ router.get('/qna_detail/:id', function(req, res) {
     res.render('qna_detail.ejs', {data:rows, user:req.session.user});
   })
 })
+
 
 //질문답변 edit 페이지
 router.get('/qna_edit/:id', function(req, res) {
@@ -57,6 +74,7 @@ router.get('/qna_edit/:id', function(req, res) {
     res.render('qna_edit.ejs', {data:rows, user:req.session.user});
   })
 })
+
 
 //게시물 쓰기 라우터
 router.post('/qna_post', function(req, res) {
@@ -74,6 +92,7 @@ router.post('/qna_post', function(req, res) {
   })
 })
 
+
 //댓글 쓰기 라우터
 router.post('/qna_comment_post', function(req, res) {
   let comment = req.body.comment;
@@ -90,12 +109,21 @@ router.post('/qna_comment_post', function(req, res) {
   })
 })
 
+
+//현재 날짜 가져오기
 function postDate() {
   const today = new Date();
   const year = today.toLocaleDateString('en-US', {year: 'numeric',});
   const month = today.toLocaleDateString('en-US', {month: '2-digit',});
   const day = today.toLocaleDateString('en-US', {day: '2-digit',});
   return `${year}-${month}-${day}`;
+}
+
+
+//client ip를 가져오는 함수
+function getUserIP(req) {
+  const addr = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  return addr
 }
 
 //router 변수를 외부 노출

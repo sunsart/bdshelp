@@ -36,6 +36,10 @@ app.use(session({
 }))
 //---------------------------------------
 
+//게시판 조회수 중복제거에 사용 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 //post방식의 데이터 사용을 위한 body-parser 설정
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}));

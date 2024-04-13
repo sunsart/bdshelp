@@ -161,7 +161,7 @@ router.post('/changePw', function(req, res) {
   conn.query(sql, params, function(err, result) {
     if(err) throw err;
     res.send("비밀번호변경성공"); 
-    })
+  })
 });
 
 //router 변수를 외부 노출

@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "body-parser": "^1.20.2",
     "cheerio": "^1.0.0-rc.12",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
@@ -20,6 +21,7 @@
     "express-session": "^1.18.0",
     "node-mysql": "^0.4.2",
     "nodemailer": "^6.9.13",
+    "request-ip": "^3.3.0",
     "sha256": "^0.2.0"
   }
 }
