@@ -34,11 +34,13 @@
   <!-- 질문답변 -->
   <div class="container">
 
+    <input type="text" id="qna-id" value="<%= data[0].id %>" hidden>
+
     <input type="text" id="title" value="<%= data[0].title %>">
 
     <textarea id="content"><%= data[0].content %></textarea>
 
-    <input type="button" name="edit" value="수정완료" onClick="">
+    <input type="button" name="edit" value="수정완료" onClick="updateQna()">
 
     <table class="comment">
       <% for(let i=0; i<data.length; i++) { %>

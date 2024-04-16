@@ -45,3 +45,28 @@ function postComment() {
     })
   }
 }
+
+//update qna
+function updateQna() {
+  let qna_id = document.getElementById("qna-id").value;
+  let title = document.getElementById("title").value;
+  let content = document.getElementById("content").value;
+
+  if(title == "")
+    alert("제목을 입력하세요");
+  else if(content == "")
+    alert("내용을 입력하세요");
+  else {
+    $.ajax({
+      url : "/qna_update",
+      type : "POST",
+      data : {qna_id:qna_id, title:title, content:content},
+      success : function(data) {
+        if(data == "게시물수정성공") {
+          alert("수정했습니다")
+          window.location.href = '/qna_detail/' + qna_id;
+        }
+      }
+    })
+  }
+}

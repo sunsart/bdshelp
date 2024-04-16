@@ -28,13 +28,7 @@ router.get('/qna_list', function(req, res) {
 })
 
 
-//질문답변 게시물등록 페이지
-router.get('/qna_write', function(req, res) {
-  res.render('qna_write.ejs', {user:req.session.user});
-})
-
-
-//질문답변 게시물내용 & 댓글 페이지
+//질문답변 게시물내용보기 & 댓글 페이지
 router.get('/qna_detail/:id', async function(req, res) {
   // 쿠키에 저장되어있는 값이 있는지 확인 (없을시 undefined 반환)
   if (req.cookies[req.params.id] == undefined) {
@@ -50,7 +44,7 @@ router.get('/qna_detail/:id', async function(req, res) {
       if(err) throw err;
     })
   }
-  //쿠키에 저장값이 있으면 조회수 증가하지 않음
+  //쿠키에 저장값이 있으면 조회수 증가하지 않고, 내용을 보여줌
   let sql = " SELECT q.id, q.title, q.content, q.user_id, c.comment, c.user_name, c.created_at \
               FROM qna AS q LEFT OUTER JOIN comments AS c \
               ON q.id = c.qna_id \
@@ -63,7 +57,7 @@ router.get('/qna_detail/:id', async function(req, res) {
 })
 
 
-//질문답변 edit 페이지
+//질문답변 edit 양식 페이지
 router.get('/qna_edit/:id', function(req, res) {
   let sql = " SELECT id, title, content \
               FROM qna \
@@ -73,6 +67,27 @@ router.get('/qna_edit/:id', function(req, res) {
     if(err) throw err;
     res.render('qna_edit.ejs', {data:rows, user:req.session.user});
   })
+})
+
+
+//질문답변 update
+router.post('/qna_update', function(req, res) {
+  let qna_id = req.body.qna_id
+  let title = req.body.title;
+  let content = req.body.content;
+  let post_date = postDate();
+  let sql = "UPDATE qna SET title=?, content=?, created_at=? WHERE id=?";
+  let params = [title, content, post_date, qna_id];
+  conn.query(sql, params, function(err, result) {
+    if(err) throw err;
+    res.send("게시물수정성공");
+  })
+})
+
+
+//질문답변 게시물등록 페이지
+router.get('/qna_write', function(req, res) {
+  res.render('qna_write.ejs', {user:req.session.user});
 })
 
 
