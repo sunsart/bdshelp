@@ -53,7 +53,7 @@ $(document).ready(function() {
 				cb.style.visibility = 'hidden';
 			//선택버튼 활성화시 칼럼 사이즈 늘리기
 			let td = document.getElementById("col-size");
-			td.style.width = '15%';
+			td.style.width = '14%';
 		} 
 		else if (this.innerText == "완료") {
 			this.innerText = "수정";
@@ -67,7 +67,7 @@ $(document).ready(function() {
 				cb.style.visibility = 'visible';
 			//선택버튼 비활성화시 칼럼 사이즈 복원
 			let td = document.getElementById("col-size");
-			td.style.width = '12%';
+			td.style.width = '11%';
 		}
 	})	
 });

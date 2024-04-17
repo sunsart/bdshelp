@@ -44,6 +44,7 @@
 
       <% if (user && user.id == data[0].user_id ) { %>
         <input type="button" name="edit" value="수정" onClick="location.href='/qna_edit/<%= data[0].id %>'">
+        <input type="button" name="delete" value="삭제" onClick="deleteQna()">
       <% } %>
     </div>
 

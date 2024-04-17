@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/menu.css">
 	<link rel="stylesheet" href="../css/qna_list.css">
+	<link rel="stylesheet" href="../css/footer.css">
 
   <!-- JS 링크 -->
 </head>
@@ -66,6 +67,11 @@
 			<button class="write-button" style="visibility:hidden;" onclick="location.href='./qna_write'">글쓰기</button>
 		<% } %>
 	</div>
+
+	<!-- ===== footer ===== -->
+  <header>
+    <%- include('footer', {user:user}) %>
+  </header>
 	
 </body>
 </html>

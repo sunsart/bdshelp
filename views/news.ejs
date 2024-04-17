@@ -104,16 +104,10 @@
     <% } %> 
   </table>
 
-  <!--문의 하기-->
-  <footer class="footer">
-    <p>Copyright 2024. All rights reserved.</p>
-    <br>
-    <p>현재 경기도에서 공인중개사로 일하고 있습니다.</p>
-    <p>일하면서 필요해서 만든 사이트인데, 다른 중개사분들께 도움이 될까해서 공개합니다.</p>
-    <p>수정할 부분이나 건의할 내용이 있으면 언제든 환영합니다.</p>
-    <p>문의하기 <a id="email_address">sunsart7@naver.com</a> </p>
-    <br>
-</footer>
+  <!-- ===== footer ===== -->
+  <header>
+    <%- include('footer', {user:user}) %>
+  </header>
 
 </body>
 

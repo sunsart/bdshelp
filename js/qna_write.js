@@ -70,3 +70,21 @@ function updateQna() {
     })
   }
 }
+
+//delete qna
+function deleteQna() {
+  if(confirm("게시글을 삭제하시겠습니까?")) {
+    let qna_id = document.getElementById("qna-id").value;
+    $.ajax({
+      url : "/qna_delete",
+      type : "POST",
+      data : {qna_id:qna_id},
+      success : function(data) {
+        if(data == "게시물삭제성공") {
+          alert("게시글을 삭제했습니다")
+          window.location.href = '/qna_list';
+        }
+      }
+    })
+	}
+}

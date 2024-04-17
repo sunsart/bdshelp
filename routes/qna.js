@@ -124,6 +124,16 @@ router.post('/qna_comment_post', function(req, res) {
   })
 })
 
+//게시물 삭제 라우터
+router.post('/qna_delete', function(req, res) {
+  let qna_id = req.body.qna_id;
+  let sql = "DELETE FROM qna WHERE id = ?";
+  conn.query(sql, qna_id, function(err, result) {
+    if(err) throw err;
+    res.send("게시물삭제성공");
+  })
+})
+
 
 //현재 날짜 가져오기
 function postDate() {
