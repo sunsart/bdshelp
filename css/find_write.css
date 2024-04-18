@@ -1,0 +1,54 @@
+.board-name {
+  margin: 40px auto;
+  font-size: 20px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container_input {
+  border-radius: 5px;
+  /* background-color: #f2f2f2; */
+  padding: 20px;
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+	text-align:center;
+	width:80px;
+  margin: 12px auto;
+}
+
+input[type=text], textarea {
+  width: 60%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 15px;
+}
+
+.container_textarea *{
+	vertical-align:middle;
+  margin-top: 4px;
+}
+
+input[value=등록] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 20px auto;
+}
+
+input[value=등록]:hover {
+  background-color: #45a049;
+}
+
+
+
