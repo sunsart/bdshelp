@@ -28,12 +28,19 @@ router.get('/qna_list', function(req, res) {
 })
 
 
+//질문답변 게시물등록 페이지
+router.get('/qna_write', function(req, res) {
+  res.render('qna_write.ejs', {user:req.session.user});
+})
+
+
 //질문답변 게시물내용보기 & 댓글 페이지
 router.get('/qna_detail/:id', async function(req, res) {
   // 쿠키에 저장되어있는 값이 있는지 확인 (없을시 undefined 반환)
-  if (req.cookies[req.params.id] == undefined) {
+  let keyVal = "q_" + req.params.id;
+  if (req.cookies[keyVal] == undefined) {
     // key, value, 옵션을 설정해준다.
-    res.cookie(req.params.id, getUserIP(req), {
+    res.cookie(keyVal, getUserIP(req), {
       // 유효시간 : 1분  **테스트용 1분 / 출시용 1시간 3600000  
       maxAge: 60000
     })
@@ -82,12 +89,6 @@ router.post('/qna_update', function(req, res) {
     if(err) throw err;
     res.send("게시물수정성공");
   })
-})
-
-
-//질문답변 게시물등록 페이지
-router.get('/qna_write', function(req, res) {
-  res.render('qna_write.ejs', {user:req.session.user});
 })
 
 

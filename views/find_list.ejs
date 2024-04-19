@@ -30,6 +30,21 @@
 	<div class="board_name">
     <span>매물찾아요 게시판</span>
   </div>
+
+	<!-- 매물찾아요 Cards -->
+	<div class="cards">
+		<% for(let i=0; i<data.length; i++) { %>
+			<div class="card">
+				<a href="#"> <p class="title"><%= data[i].title %></p> </a>
+				<a href="#"> <p class="region"><%= data[i].region %></p> </a>
+				<a href="#"> <p class="area"><%= data[i].area %></p> </a>
+				<a href="#"> <p class="cost"><%= data[i].cost %></p> </a> <br>
+				<a href="#"> <p class="etc"><%= data[i].etc %></p> </a> <br>
+				<p class="id"> <%= data[i].user_name %> </p>
+			</div>
+		<% } %>
+	</div>
+	
 	
 	<div class="container">
 		<table>
@@ -45,7 +60,7 @@
 			<tbody>
 				<% for(let i=0; i<data.length; i++) { %>
 					<tr>
-            <td class="td_title"> <a href="#"><%= data[i].title %></a> </td>
+            <td class="td_title"> <a href="/find_detail/<%= data[i].id %>"><%= data[i].title %></a> </td>
 						<td class="td_center"> <label><%= data[i].user_name %></label> </td>
 						<td class="td_center"> <label><%= data[i].created_at %></label> </td>
 						<td class="td_center"> <label><%= data[i].hit %></label> </td>

@@ -30,6 +30,10 @@ input[type=text], textarea {
   font-size: 15px;
 }
 
+textarea {
+  padding: 12px 6px;
+}
+
 .container_textarea *{
 	vertical-align:middle;
   margin-top: 4px;
