@@ -56,6 +56,7 @@ app.use('/', require('./routes/list.js'));
 app.use('/', require('./routes/news.js'));
 app.use('/', require('./routes/qna.js'));
 app.use('/', require('./routes/find.js'));
+app.use('/', require('./routes/document.js'));
 
 app.listen(8080, function(){
   console.log("포트 8080으로 서버 대기중 ...")

@@ -50,36 +50,5 @@ const getHtml = async () => {
   }
 };
 
-//뉴스 페이지
-// router.get('/news', function(req, res) {
-//   getHtml()
-//   .then(html => {
-//     let ulList = [];
-//     const $ = cheerio.load(html.data);
-//     const $bodyList = $("div.box_etc ul").children("li");
-
-//     $bodyList.each(function(i, elem) {
-//       ulList[i] = {
-//           title: $(this).find('strong.tit_thumb a').text(),
-//           url: $(this).find('strong.tit_thumb a').attr('href'),
-//           summary: $(this).find('span.link_txt').text(),
-//           press: $(this).find('span.info_news').text(),
-//       };
-//     });
-
-//     const data = ulList.filter(n => n.title);
-//     res.render('news.ejs', {data:data, user:req.session.user})
-//   }) 
-// })
-
-//다음 뉴스 부동산 카테고리
-// const getHtml = async () => {
-//   try {
-//     return await axios.get("https://news.daum.net/breakingnews/economic/estate");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
 //router 변수를 외부 노출
 module.exports = router;
