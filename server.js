@@ -50,6 +50,8 @@ app.set('view engine', 'ejs');
 //서버가 정적파일을 제공하도록 하기 위한 설정
 app.use(express.static(__dirname + ''));
 
+
+
 //라우터 분리
 app.use('/', require('./routes/auth.js'));
 app.use('/', require('./routes/list.js'));

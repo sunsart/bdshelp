@@ -21,7 +21,6 @@
   <script src="../js/document_write.js"></script>
 </head>
 <body>
-
 	<!-- ===== Header ===== -->
   <header>
     <%- include('menu', {user:user}) %>
@@ -32,22 +31,23 @@
   </div>
 
   <div class="container_input">
+    <form action="/document_upload" method="POST" enctype="multipart/form-data">
+      <div class="row">
+        <label for="title">*제목</label>
+        <input type="text" id="title" name="title"> <br>
+      </div>
+      
+      <div class="container_textarea">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="10"></textarea> <br>
 
-      <form action="/document_upload" method="POST">
-        <div class="row">
-          <label for="title">*제목</label>
-          <input type="text" id="title" name="title"> <br>
+        <div class="buttons">
+          <input type="file" name="file">
+          <button type="submit"> 파일첨부 </button>
         </div>
-        
-        <div class="container_textarea">
-          <label for="content">내용</label>
-          <textarea id="content" name="content" rows="10"></textarea> <br>
-
-        <input type="file" name="file"> <br>
-        <button type="submit"> 파일첨부 </button>
-      </form>
-
+      </div>
+    </form>
   </div>
-
 </body>
+
 </html>

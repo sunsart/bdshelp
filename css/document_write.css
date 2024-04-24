@@ -35,6 +35,12 @@ input[type=text], textarea {
   margin-top: 4px;
 }
 
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 button[type=submit] {
   background-color: #04AA6D;
   color: white;
