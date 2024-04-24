@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부동산 도우미 - 부동산양식 자료실 페이지</title>
+  <meta name="description" content="부동산 도우미 웹사이트는 부동산 계약 특약사항 작성에 도움을 드립니다">
+
+  <!-- 브라우저 css 기본스타일 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+  
+	<!-- 제이쿼리 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <!-- css 링크  -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/menu.css">
+	<link rel="stylesheet" href="../css/document_list.css">
+	<link rel="stylesheet" href="../css/footer.css">
+
+  <!-- JS 링크 -->
+</head>
+<body>
+
+	<!-- ===== Header ===== -->
+  <header>
+    <%- include('menu', {user:user}) %>
+  </header>
+
+	<div class="board_name">
+    <span>부동산 서식 자료실</span>
+  </div>
+
+	<!--  -->
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th style="width: 62%;">제목</th>
+					<th style="width: 12%;">작성자</th>
+					<th style="width: 10%;">작성일</th>
+					<th style="width: 8%;">조회수</th>
+          <th style="width: 8%;">다운로드</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% for(let i=0; i<data.length; i++) { %>
+					<tr>
+            <td class="td_title"> <a href="/find_detail/<%= data[i].id %>"><%= data[i].title %></a> </td>
+						<td class="td_center"> <label><%= data[i].user_name %></label> </td>
+						<td class="td_center"> <label><%= data[i].created_at %></label> </td>
+						<td class="td_center"> <label><%= data[i].hit %></label> </td>
+            <td class="td_center"> <label><%= data[i].down %></label> </td>
+					</tr> 
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: center;">
+		<% if (user) { %>
+			<button class="write_button" style="visibility:visible;" onclick="location.href='./document_write'">서식 올리기</button>
+		<% } else { %>
+			<button class="write_button" style="visibility:hidden;" onclick="location.href='./document_write'">서식 올리기</button>
+		<% } %>
+	</div>
+	
+
+	<!-- ===== footer ===== -->
+  <header>
+    <%- include('footer', {user:user}) %>
+  </header>
+	
+</body>
+</html>

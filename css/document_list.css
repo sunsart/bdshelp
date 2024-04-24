@@ -1,0 +1,48 @@
+/* ======== */
+.board_name {
+  margin-top: 40px;
+  font-size: 20px;
+  text-align: center;
+}
+
+table { 
+  line-height: 40px; 
+  width: 70%;
+  margin : 40px auto;
+}
+
+table, th, td { 
+  border: 1px solid darkgray; 
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+.td_title {
+  padding-left: 10px;
+}
+
+.td_title a:link {
+  color: black;
+}
+
+.td_title a:visited {
+  color: black;
+}
+
+.td_center {
+  text-align: center;
+}
+
+.write_button {
+  border: none; 
+  color: white; 
+  padding: 10px 20px; 
+  cursor: pointer;
+  background-color: #04AA6D;
+}
+
+.write_button:hover {
+  background-color: #46a049;
+}
+
+
