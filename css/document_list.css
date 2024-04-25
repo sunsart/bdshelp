@@ -5,10 +5,50 @@
   text-align: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+form.example {
+  margin : 40px auto 0px auto;
+  max-width: 300px;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 15px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 table { 
   line-height: 40px; 
-  width: 70%;
-  margin : 40px auto;
+  width: 60%;
+  margin : 20px auto;
 }
 
 table, th, td { 

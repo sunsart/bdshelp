@@ -19,6 +19,8 @@
 	<link rel="stylesheet" href="../css/footer.css">
 
   <!-- JS 링크 -->
+	<!-- 이미지 폰트 사용 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -31,7 +33,13 @@
     <span>부동산 서식 자료실</span>
   </div>
 
-	<!--  -->
+
+	<form class="example" method="GET" action="/document_search">
+		<input type="text" name="search" placeholder="검색어를 입력하세요">
+		<button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+
+	<!-- 테이블  -->
 	<div class="container">
 		<table>
 			<thead>
@@ -39,17 +47,15 @@
 					<th style="width: 70%;">제목</th>
 					<th style="width: 12%;">작성자</th>
 					<th style="width: 10%;">작성일</th>
-          <th style="width: 8%;">다운로드</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<% for(let i=0; i<data.length; i++) { %>
 					<tr>
-            <td class="td_title"> <a href="/find_detail/<%= data[i].id %>"><%= data[i].title %></a> </td>
+            <td class="td_title"> <a href="/document_detail/<%= data[i].id %>"><%= data[i].title %></a> </td>
 						<td class="td_center"> <label><%= data[i].user_name %></label> </td>
 						<td class="td_center"> <label><%= data[i].created_at %></label> </td>
-            <td class="td_center"> <label><%= data[i].down %></label> </td>
 					</tr> 
 				<% } %>
 			</tbody>
@@ -70,5 +76,8 @@
     <%- include('footer', {user:user}) %>
   </header>
 	
+	<script>
+
+	</script>
 </body>
 </html>

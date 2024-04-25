@@ -1,0 +1,57 @@
+.board-name {
+  margin: 40px auto;
+  font-size: 20px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container_input {
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+	text-align:center;
+	width:80px;
+  margin: 12px auto;
+}
+
+#original_name:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+input[type=text], textarea {
+  width: 60%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 15px;
+}
+
+.container_textarea *{
+	vertical-align:middle;
+  margin-top: 4px;
+}
+
+input[type=button] {
+  border: none; 
+  color: white; 
+  padding: 10px 20px; 
+  cursor: pointer;
+  background-color: #04AA6D;
+}
+
+input[type=button]:hover {
+  background-color: #46a049;
+}
+
+
+
+

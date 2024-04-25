@@ -34,7 +34,7 @@
     <form action="/document_upload" method="POST" enctype="multipart/form-data">
       <div class="row">
         <label for="title">*제목</label>
-        <input type="text" id="title" name="title"> <br>
+        <input type="text" id="title" name="title" required> <br>
       </div>
       
       <div class="container_textarea">
@@ -43,6 +43,7 @@
 
         <div class="buttons">
           <input type="file" name="file">
+          <p class="file_limit">첨부파일의 크기는 2 MB를 초과할 수 없습니다</p>
           <button type="submit"> 파일첨부 </button>
         </div>
       </div>

@@ -1,5 +1,6 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 //라우터 객체
 let router = require('express').Router();
@@ -18,10 +19,21 @@ conn.connect();
 
 //부동산서식 리스트 페이지
 router.get('/document_list', function(req, res) {
-  let sql = " SELECT id, title, content, user_id, user_name, down, created_at \
+  let sql = " SELECT id, title, content, user_id, user_name, created_at \
               FROM document \
               ORDER BY id DESC";
   conn.query(sql, function(err, rows) {
+    if(err) throw err;
+    res.render('document_list.ejs', {data:rows, user:req.session.user});
+  })
+})
+
+//부동산서식 검색 리스트 페이지
+router.get('/document_search', function(req, res) {
+  let query = "%" + req.query.search +"%";
+  let sql = " SELECT * FROM document WHERE title LIKE ? ORDER BY id DESC";
+  let params = query;        
+  conn.query(sql, params, function(err, rows) {
     if(err) throw err;
     res.render('document_list.ejs', {data:rows, user:req.session.user});
   })
@@ -33,22 +45,15 @@ router.get('/document_write', function(req, res) {
 })
 
 
-//쓰기 라우터
-// router.post('/document_upload', function(req, res) {
-//   let title = req.body.title;
-//   let content = req.body.content;
-  
-//   let user_id = req.session.user.id;
-//   let user_name = req.session.user.name;
-//   let upload_date = postDate();
-
-//   let sql = " INSERT INTO document (title, content, user_id, user_name, created_at) VALUES (?, ?, ?, ?, ?)";
-//   let params = [title, content, user_id, user_name, upload_date];
-//   conn.query(sql, params, function(err, result) {
-//     if(err) throw err;
-//     res.redirect("/document_list");
-//   })
-// })
+//부동산서식 상세 페이지
+router.get('/document_detail/:id', async function(req, res) {
+  let sql = "SELECT * FROM document WHERE id = ?";
+  let params = req.params.id;
+  conn.query(sql, params, function(err, rows) {
+    if(err) throw err;
+    res.render('document_detail.ejs', {data:rows, user:req.session.user});
+  })
+})
 
 
 //파일 업로드
@@ -69,8 +74,13 @@ const upload = multer({
 });
 
 router.post("/document_upload", upload.single("file"), (req, res)=>{
-  if(!req.file) 
-    return res.status(400).json({ error: '이미지를 업로드해주세요.' });
+  try {
+    if(!req.file)
+      return res.status(400).json({ 에러 : '파일을 첨부하세요' });
+  } catch (error) {
+      //console.error(error);
+      return res.status(400).json({ 에러 : '파일의 크기는 2 MB를 초과할 수 없습니다' });
+  }
 
   let title = req.body.title;
   let content = req.body.content;
@@ -90,6 +100,38 @@ router.post("/document_upload", upload.single("file"), (req, res)=>{
   })
 });
 
+
+//파일 다운로드
+router.get('/uploads/:file_name', async(req, res) => {
+  let upload_folder = '/uploads/';
+  let fileName = Buffer.from(req.params.file_name, "latin1").toString("utf8");
+  let filePath = upload_folder + fileName;
+  try {
+    if(fs.existsSync(filePath)) { 
+      res.download(filePath, fileName);
+      // 다운로드시 다운수 증가 기능 구현 못함. get방식에서 document.id 값을 못가져옴
+    } else {
+      res.send('해당 파일이 없습니다.');  
+      return;
+    }
+  } catch (e) { 
+    console.log(e);
+    res.send('파일을 다운로드하는 중에 에러가 발생하였습니다.');
+    return;
+  }
+});
+
+//게시물 삭제
+router.post('/document_delete', function(req, res) {
+  let document_id = req.body.document_id;
+  let sql = "DELETE FROM document WHERE id = ?";
+  conn.query(sql, document_id, function(err, result) {
+    if(err) throw err;
+    res.send("게시물삭제성공");
+  })
+})
+
+
 //현재 날짜 가져오기
 function postDate() {
   const today = new Date();
@@ -98,6 +140,7 @@ function postDate() {
   const day = today.toLocaleDateString('en-US', {day: '2-digit',});
   return `${year}-${month}-${day}`;
 }
+
 
 //router 변수를 외부 노출
 module.exports = router;
