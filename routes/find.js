@@ -24,6 +24,20 @@ router.get('/find_list', function(req, res) {
   })
 })
 
+//매물찾아요 검색 리스트 페이지
+router.get('/find_search', function(req, res) {
+  let query = "%" + req.query.search +"%";
+  let sql = " SELECT id, title, region, area, cost, etc, user_id, user_name, hit, created_at \
+              FROM find \
+              WHERE title LIKE ? OR etc LIKE ? \
+              ORDER BY id DESC";
+  let params = [query, query];  
+  conn.query(sql, params, function(err, rows) {
+    if(err) throw err;
+    res.render('find_list.ejs', {data:rows, user:req.session.user});
+  })
+})
+
 
 //매물찾아요 게시물등록 페이지
 router.get('/find_write', function(req, res) {

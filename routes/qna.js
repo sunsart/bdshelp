@@ -16,12 +16,31 @@ conn.connect();
 //질문답변 리스트 (스칼라 서브쿼리 성능문제로 차후 left join 방식으로 변경 필요)
 router.get('/qna_list', function(req, res) {
   let sql = " SELECT id, title, user_name, hit, created_at, ( \
-                SELECT count(*) \
-                FROM comments AS c \
-                WHERE c.qna_id = q.id) AS commentCount \
+              SELECT count(*) \
+              FROM comments AS c \
+              WHERE c.qna_id = q.id) AS commentCount \
               FROM qna AS q \
               ORDER BY id DESC";
   conn.query(sql, function(err, rows) {
+    if(err) throw err;
+    res.render('qna_list.ejs', {data:rows, user:req.session.user});
+  })
+})
+
+//질문답변 검색 리스트 페이지
+router.get('/qna_search', function(req, res) {
+  let query = "%" + req.query.search +"%";
+
+  let sql = " SELECT id, title, content, user_name, hit, created_at, ( \
+              SELECT count(*) \
+              FROM comments AS c \
+              WHERE c.qna_id = q.id) AS commentCount \
+              FROM qna AS q \
+              WHERE title LIKE ? OR content LIKE ? \
+              ORDER BY id DESC";
+
+  let params = [query, query];        
+  conn.query(sql, params, function(err, rows) {
     if(err) throw err;
     res.render('qna_list.ejs', {data:rows, user:req.session.user});
   })

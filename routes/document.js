@@ -31,8 +31,8 @@ router.get('/document_list', function(req, res) {
 //부동산서식 검색 리스트 페이지
 router.get('/document_search', function(req, res) {
   let query = "%" + req.query.search +"%";
-  let sql = " SELECT * FROM document WHERE title LIKE ? ORDER BY id DESC";
-  let params = query;        
+  let sql = " SELECT * FROM document WHERE title LIKE ? OR content LIKE ? ORDER BY id DESC";
+  let params = [query, query];        
   conn.query(sql, params, function(err, rows) {
     if(err) throw err;
     res.render('document_list.ejs', {data:rows, user:req.session.user});
@@ -106,9 +106,12 @@ router.get('/uploads/:file_name', async(req, res) => {
   let upload_folder = '/uploads/';
   let fileName = Buffer.from(req.params.file_name, "latin1").toString("utf8");
   let filePath = upload_folder + fileName;
+
+  let result = fileName.split("_");
+  
   try {
     if(fs.existsSync(filePath)) { 
-      res.download(filePath, fileName);
+      res.download(filePath, result[0]);
       // 다운로드시 다운수 증가 기능 구현 못함. get방식에서 document.id 값을 못가져옴
     } else {
       res.send('해당 파일이 없습니다.');  

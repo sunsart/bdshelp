@@ -19,6 +19,8 @@
 	<link rel="stylesheet" href="../css/footer.css">
 
   <!-- JS 링크 -->
+	<!-- 이미지 폰트 사용 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -45,7 +47,11 @@
 		<% } %>
 	</div>
 	
-	
+	<form class="example" method="GET" action="/find_search">
+		<input type="text" name="search" placeholder="검색어를 입력하세요">
+		<button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+
 	<div class="container">
 		<table>
 			<thead>
