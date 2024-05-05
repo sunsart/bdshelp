@@ -1,0 +1,110 @@
+.container_calendar {
+  width: 55%;
+  margin: 20px auto;
+}
+
+/* 화면 전체를 불투명한 창으로 덮기 */
+.background_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  
+  /* 화면에서 숨기기 */
+  z-index: -1;
+  opacity: 0;
+}
+
+/* 화면에 보이기 */
+.show_modal {
+  opacity: 1;
+  z-index: 1001;
+  transition: all .5s;
+}
+
+.window_modal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.popup_modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  
+  /* 팝업창 크기 */
+  width: 400px;
+  height: 400px;
+  
+  /* 초기에 약간 아래에 배치 */
+  transform: translate(-50%, -40%);
+}
+
+.container_modal {
+  padding: 16px;
+}
+
+.show_modal .popup_modal {
+  transform: translate(-50%, -50%);
+  transition: all .5s;
+}
+
+.title {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+  font-size: 18px;
+  font-weight: 800;
+}
+
+hr {
+  border: 1px solid #dcdbdb;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+}
+
+input[type=date] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+}
+
+.modal_btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 4px 0px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+input[type=button]:hover {
+  opacity:1;
+}
+
+

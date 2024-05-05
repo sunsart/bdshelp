@@ -110,6 +110,11 @@ router.post('/findpw', function(req, res) {
   })
 });
 
+//약관 라우터
+router.get('/terms', function(req, res) {
+  res.render('terms.ejs', {user:req.session.user});
+})
+
 //비밀번호 확인용 여섯자리 코드번호 생성
 function makeCodenum() {
   let number = "";

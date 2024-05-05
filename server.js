@@ -51,7 +51,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + ''));
 
 
-
 //라우터 분리
 app.use('/', require('./routes/auth.js'));
 app.use('/', require('./routes/list.js'));
@@ -60,6 +59,7 @@ app.use('/', require('./routes/qna.js'));
 app.use('/', require('./routes/find.js'));
 app.use('/', require('./routes/document.js'));
 app.use('/', require('./routes/placard.js'));
+app.use('/', require('./routes/calendar.js'));
 
 app.listen(8080, function(){
   console.log("포트 8080으로 서버 대기중 ...")
