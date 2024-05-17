@@ -65,11 +65,11 @@
   font-weight: 800;
 }
 
-hr {
+/* hr {
   border: 1px solid #dcdbdb;
   margin-top: 25px;
   margin-bottom: 25px;
-}
+} */
 
 input[type=text] {
   width: 100%;
@@ -90,6 +90,7 @@ input[type=date] {
   box-sizing: border-box;
   margin-bottom: 25px;
 }
+
 
 .modal_btn {
   background-color: #04AA6D;

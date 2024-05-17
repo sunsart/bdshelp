@@ -47,28 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
     dayMaxEventRows: true,  // Row 높이보다 많으면 +숫자 more 링크 표시
 		nowIndicator: true, // 현재 시간 마크
     displayEventTime: false, // 시간 표시 x, 하루이상 일정등록시 end날짜 포함
+    eventDisplay : 'block',
     //eventBackgroundColor: , //이벤트의 배경색을 설정
     //eventBorderColor: , //  이벤트의 테두리 색을 설정합니다.
 		locale: 'ko', // 한국어 설정
-    events: [ // 캘린더에 표시할 이벤트 데이터를 정의          
-      {            
-        title: '어린이날',            
-        start: '2024-05-05', 
-        backgroundColor : "#008000"
-        // color 값을 추가해 색상도 변경 가능         
-      },          
-      {            
-        title: '이삿날',            
-        start: '2024-05-07',            
-        end: '2024-05-10',
-        backgroundColor : "blue"      
-      },          
-      {            
-        groupId: 999,            
-        title: 'Repeating Event',            
-        start: '2024-05-13T16:00:00'          
-      },          
-    ]
+    events: []    // 캘린더에 표시할 이벤트 데이터를 정의 
 	};
 
   // 캘린더 생성
@@ -102,6 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function showModal() {
   document.querySelector(".background_modal").className = "background_modal show_modal";
   document.querySelector("#title").value = "";
+  document.querySelector("#start_date").value = "";
+  document.querySelector("#end_date").value = "";
 }
 
 function closeModal() { 
@@ -112,18 +97,22 @@ function addCalendar() {
   let content = document.querySelector("#title").value;
   let start_date = document.querySelector("#start_date").value;
   let end_date = document.querySelector("#end_date").value;
+  let color = document.querySelector("#select").value;
   
   if(content == null || content == "") {
     alert("일정내용을 입력하세요");
-  } else if(start_date == "" || end_date =="") {
-    alert("날짜를 입력하세요");
+  } else if(start_date == "") {
+    alert("시작날짜를 입력하세요");
+  } else if(end_date == "") {
+    alert("종료날짜를 입력하세요");
   } else if(new Date(end_date)- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
-    alert("종료일이 시작일보다 먼저입니다");
+    alert("종료날짜가 시작날짜보다 먼저입니다!");
   } else { 
     let obj = {
       "title" : content,
-      "start" : start_date,
-      "end" : end_date
+      "start" : start_date + " 00:00:00", // 2일 이상 일정추가시 캘린더에 하루 적게 표시되는 것을 수정하기 위해 시간 추가
+      "end" : end_date + " 24:00:00",     // 2일 이상 일정추가시 캘린더에 하루 적게 표시되는 것을 수정하기 위해 시간 추가
+      "backgroundColor" : color,  
     } 
     console.log(obj); // 서버로 해당 객체를 전달해서 DB 연동 가능
     calendar.addEvent(obj);

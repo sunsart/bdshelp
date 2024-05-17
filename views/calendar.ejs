@@ -50,6 +50,14 @@
           <label for="end_date">종료날짜</label>
           <input type="date" id="end_date">
 
+          <label for="select">일정컬러</label>
+          <select name="color" id="select">
+            <option style="background-color:rgba(0, 0, 255, 0.8); color:white;" value="rgba(0, 0, 255, 0.8)" selected>blue</option>
+            <option style="background-color:rgba(255, 166, 0, 0.8); color:white;" value="rgba(255, 166, 0, 0.8)">orange</option>
+            <option style="background-color:rgba(255, 0, 0, 0.8); color:white;" value="rgba(255, 0, 0, 0.8)">red</option>
+            <option style="background-color:rgba(0, 128, 0, 0.8); color:white;" value="rgba(0, 128, 0, 0.8">green</option>
+          </select>
+
           <button type="button" class="modal_btn" onclick="addCalendar()">등록</button>
           <button type="button" class="modal_btn" onclick="closeModal()">취소</button>
         </div>
