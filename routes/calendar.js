@@ -1,22 +1,48 @@
 //라우터 객체
 let router = require('express').Router();
 
-// //nodejs 와 mysql 접속
-// var mysql = require('mysql');
-// var conn = mysql.createConnection({
-//   host: process.env.HOST,
-//   user: process.env.USER,
-//   password: process.env.PASS,
-//   database: process.env.DATABASE
-// });
-// conn.connect();
+//nodejs 와 mysql 접속
+var mysql = require('mysql');
+var conn = mysql.createConnection({
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASS,
+  database: process.env.DATABASE
+});
+conn.connect();
 
 //-----------------------------------------//
 
 
 //
 router.get('/calendar', function(req, res) {
-  res.render('calendar.ejs', {user:req.session.user});
+  //로그인 되어 있으면
+  if(req.session.user) {
+    let sql = "SELECT * FROM schedule WHERE user_id=?";
+    let params = [req.session.user.id];
+    conn.query(sql, params, function(err, rows) {
+    if(err) throw err;
+    res.render('calendar.ejs', {data:rows, user:req.session.user});
+    })
+  } else {
+    //로그인 되어 있지 않으면
+    res.render('calendar.ejs', {user:req.session.user});
+  }
+})
+
+router.post('/schedule_add', function(req, res) {
+  let title = req.body.title;
+  let start = req.body.start;
+  let end = req.body.end;
+  let color = req.body.color;
+  let user_id = req.session.user.id;
+
+  let sql = " INSERT INTO schedule (title, start, end, color, user_id) VALUES (?, ?, ?, ?, ? )";
+  let params = [title, start, end, color, user_id];
+  conn.query(sql, params, function(err, result) {
+    if(err) throw err;
+    res.send("일정등록성공");
+  })
 })
 
 

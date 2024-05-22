@@ -1,7 +1,12 @@
 let calendar;
 
 document.addEventListener('DOMContentLoaded', function() {
-  //캘린더 헤더 옵션
+  // db 저장된 일정
+  var jsonData = document.querySelector("#scheduleData").value;
+  var arrayData = JSON.parse(jsonData);
+  console.log(arrayData);
+
+  // 캘린더 헤더 옵션
   const headerToolbar = {
     left: 'title',
     center: 'addEventButton',
@@ -51,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //eventBackgroundColor: , //이벤트의 배경색을 설정
     //eventBorderColor: , //  이벤트의 테두리 색을 설정합니다.
 		locale: 'ko', // 한국어 설정
-    events: []    // 캘린더에 표시할 이벤트 데이터를 정의 
+    events: arrayData    // 캘린더에 표시할 이벤트 데이터를 정의 
 	};
 
   // 캘린더 생성
@@ -64,12 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.on("eventChange", info => console.log("Change:", info));
   calendar.on("eventRemove", info => console.log("Remove:", info));
   calendar.on("eventClick", info => {
-      console.log("eClick:", info);
-      console.log('Event: ', info.event.extendedProps);
-      console.log('Coordinates: ', info.jsEvent);
-      console.log('View: ', info.view);
+    let title = info.event.title;
+    let start = info.event.startStr.substr(0, 10);
+    let end = info.event.endStr.substr(0, 10);
+    detailSchedule(title, start, end);
+    console.log(info.event.startStr.substr(0, 10));
+    console.log("eClick:", info);
+      //console.log('Event: ', info.event.extendedProps);
+      //console.log('Coordinates: ', info.jsEvent);
+      //console.log('View: ', info.view);
       // 재미로 그냥 보더색 바꾸깅
-      info.el.style.borderColor = 'red';
+      //info.el.style.borderColor = 'red';
   });
   //calendar.on("eventMouseEnter", info => console.log("eEnter:", info));
   //calendar.on("eventMouseLeave", info => console.log("eLeave:", info));
@@ -81,6 +91,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+function detailSchedule(title, start, end) {
+  document.querySelector(".background_modal").className = "background_modal show_modal";
+  document.querySelector("#title").value = title;
+  document.querySelector("#start_date").value = start;
+  document.querySelector("#end_date").value = end;
+}
 
 function showModal() {
   document.querySelector(".background_modal").className = "background_modal show_modal";
@@ -94,12 +110,12 @@ function closeModal() {
 }
 
 function addCalendar() { 
-  let content = document.querySelector("#title").value;
+  let title = document.querySelector("#title").value;
   let start_date = document.querySelector("#start_date").value;
   let end_date = document.querySelector("#end_date").value;
   let color = document.querySelector("#select").value;
   
-  if(content == null || content == "") {
+  if(title == null || title == "") {
     alert("일정내용을 입력하세요");
   } else if(start_date == "") {
     alert("시작날짜를 입력하세요");
@@ -109,13 +125,25 @@ function addCalendar() {
     alert("종료날짜가 시작날짜보다 먼저입니다!");
   } else { 
     let obj = {
-      "title" : content,
+      "title" : title,
       "start" : start_date + " 00:00:00", // 2일 이상 일정추가시 캘린더에 하루 적게 표시되는 것을 수정하기 위해 시간 추가
-      "end" : end_date + " 24:00:00",     // 2일 이상 일정추가시 캘린더에 하루 적게 표시되는 것을 수정하기 위해 시간 추가
+      "end" : end_date + " 24:00:00",
       "backgroundColor" : color,  
     } 
-    console.log(obj); // 서버로 해당 객체를 전달해서 DB 연동 가능
-    calendar.addEvent(obj);
+
+    $.ajax({
+      url : "/schedule_add",
+      type : "POST",
+      data : {title:obj.title, start:obj.start, end:obj.end, color:obj.backgroundColor},
+      success : function(data) {
+        if(data == "일정등록성공") {
+          calendar.addEvent(obj);
+          alert("일정을 등록했습니다")
+          //window.location.href = '/calendar';
+        }
+      }
+    })
+
     closeModal();
   }
 }

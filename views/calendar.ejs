@@ -31,9 +31,13 @@
     <%- include('menu', {user:user}) %>
   </header>
 
+  <!-- 서버에서 보내준 일정데이터배열 -->
+  <input type="hidden" id="scheduleData" value="<%=JSON.stringify(data)%>" />
+
   <div class="container_calendar">
     <div id='calendar'></div>
   </div>
+
 
   <!-- 일정 등록 모달 -->
   <div class="background_modal">
@@ -59,6 +63,7 @@
           </select>
 
           <button type="button" class="modal_btn" onclick="addCalendar()">등록</button>
+          <button type="button" class="modal_btn" onclick="">삭제</button>
           <button type="button" class="modal_btn" onclick="closeModal()">취소</button>
         </div>
       </div>
