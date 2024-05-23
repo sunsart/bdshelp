@@ -1,17 +1,31 @@
 let calendar;
+let isLogin;  // 로그인 여부
 
 document.addEventListener('DOMContentLoaded', function() {
   // db 저장된 일정
-  var jsonData = document.querySelector("#scheduleData").value;
-  var arrayData = JSON.parse(jsonData);
-  console.log(arrayData);
-
-  // 캘린더 헤더 옵션
-  const headerToolbar = {
-    left: 'title',
-    center: 'addEventButton',
-    right: 'today prev next'
+  let arrayData;
+  let jsonData;
+  let headerToolbar; // 캘린더 헤더 옵션
+  if (!document.querySelector("#scheduleData").value) { 
+    // 로그인 되어 있지 않으면
+    isLogin = false;
+    arrayData = [];
+    headerToolbar = {
+      left: 'title',
+      right: 'today prev next'
+    }
+  } else {  
+    // 로그인 되어 있으면
+    isLogin = true;
+    jsonData = document.querySelector("#scheduleData").value;
+    arrayData = JSON.parse(jsonData);
+    headerToolbar = {
+      left: 'title',
+      center: 'addEventButton',
+      right: 'today prev next'
+    }
   }
+  console.log(arrayData);
 
   // 캘린더 생성 옵션
   const calendarOption = {
@@ -46,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     navLinks : false,  // 날짜, 요일 클릭시 주단위, 일단위로 넘어가는 기능
 		selectable : true, // 사용자가 일정 범위를 선택하여 이벤트를 추가
-		droppable : true,  //캘린더에 요소를 드롭하여 이벤트를 생성할 수 있도록 허용
-		editable : true,   //이벤트의 드래그 앤 드롭, 리사이징, 이동을 허용
+		droppable : false,  // 캘린더에 요소를 드롭하여 이벤트를 생성할 수 있도록 허용
+		editable : false,   // 이벤트의 드래그 앤 드롭, 리사이징, 이동을 허용
     fixedWeekCount : false,
     dayMaxEventRows: true,  // Row 높이보다 많으면 +숫자 more 링크 표시
 		nowIndicator: true, // 현재 시간 마크
@@ -69,17 +83,35 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.on("eventChange", info => console.log("Change:", info));
   calendar.on("eventRemove", info => console.log("Remove:", info));
   calendar.on("eventClick", info => {
-    let title = info.event.title;
-    let start = info.event.startStr.substr(0, 10);
-    let end = info.event.endStr.substr(0, 10);
-    detailSchedule(title, start, end);
-    console.log(info.event.startStr.substr(0, 10));
-    console.log("eClick:", info);
-      //console.log('Event: ', info.event.extendedProps);
-      //console.log('Coordinates: ', info.jsEvent);
-      //console.log('View: ', info.view);
-      // 재미로 그냥 보더색 바꾸깅
-      //info.el.style.borderColor = 'red';
+    let result = confirm("일정을 삭제할까요?");
+    if (result) {
+      $.ajax({
+        url : "/schedule_delete",
+        type : "POST",
+        data : {id:info.event.id},
+        success : function(data) {
+          if(data == "일정삭제성공") {
+            info.event.remove();
+            alert("일정을 삭제했습니다")
+          }
+        }
+      })
+    }
+
+    // let title = info.event.title;
+    // let start = info.event.startStr.substr(0, 10);
+    // let end = info.event.endStr.substr(0, 10);
+    // let color = info.event.backgroundColor;
+    // let id = info.event.id;
+    // detailSchedule(title, start, end, color, id);
+
+    // console.log(info.event.startStr.substr(0, 10));
+    // console.log("eClick:", info);
+    //console.log('Event: ', info.event.extendedProps);
+    //console.log('Coordinates: ', info.jsEvent);
+    //console.log('View: ', info.view);
+    // 재미로 그냥 보더색 바꾸깅
+    //info.el.style.borderColor = 'red';
   });
   //calendar.on("eventMouseEnter", info => console.log("eEnter:", info));
   //calendar.on("eventMouseLeave", info => console.log("eLeave:", info));
@@ -91,14 +123,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-function detailSchedule(title, start, end) {
-  document.querySelector(".background_modal").className = "background_modal show_modal";
-  document.querySelector("#title").value = title;
-  document.querySelector("#start_date").value = start;
-  document.querySelector("#end_date").value = end;
+function detailSchedule(title, start, end, color, id) {
+  document.querySelector(".background_modal2").className = "background_modal2 show_modal2";
+  document.querySelector("#title2").value = title;
+  document.querySelector("#start_date2").value = start;
+  document.querySelector("#end_date2").value = end;
+  document.querySelector("#select2").value = color;
+  document.querySelector("#schedule_id").value = id;
 }
 
 function showModal() {
+  if (!isLogin) {
+    alert("로그인이 필요합니다");
+    return;
+  }
   document.querySelector(".background_modal").className = "background_modal show_modal";
   document.querySelector("#title").value = "";
   document.querySelector("#start_date").value = "";
@@ -107,6 +145,10 @@ function showModal() {
 
 function closeModal() { 
   document.querySelector(".background_modal").className = "background_modal";
+}
+
+function closeModal2() { 
+  document.querySelector(".background_modal2").className = "background_modal2";
 }
 
 function addCalendar() { 
@@ -140,6 +182,46 @@ function addCalendar() {
           calendar.addEvent(obj);
           alert("일정을 등록했습니다")
           //window.location.href = '/calendar';
+        }
+      }
+    })
+
+    closeModal();
+  }
+}
+
+function editCalendar() { 
+  let title = document.querySelector("#title2").value;
+  let start_date = document.querySelector("#start_date2").value;
+  let end_date = document.querySelector("#end_date2").value;
+  let color = document.querySelector("#select2").value;
+  let id = document.querySelector("#schedule_id").value;
+  
+  if(title == null || title == "") {
+    alert("일정내용을 입력하세요");
+  } else if(start_date == "") {
+    alert("시작날짜를 입력하세요");
+  } else if(end_date == "") {
+    alert("종료날짜를 입력하세요");
+  } else if(new Date(end_date)- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+    alert("종료날짜가 시작날짜보다 먼저입니다!");
+  } else { 
+    let obj = {
+      "title" : title,
+      "start" : start_date + " 00:00:00", // 2일 이상 일정추가시 캘린더에 하루 적게 표시되는 것을 수정하기 위해 시간 추가
+      "end" : end_date + " 24:00:00",
+      "backgroundColor" : color, 
+      "id" : id, 
+    } 
+
+    $.ajax({
+      url : "/schedule_edit",
+      type : "POST",
+      data : {title:obj.title, start:obj.start, end:obj.end, color:obj.backgroundColor, id:obj.id},
+      success : function(data) {
+        if(data == "일정수정성공") {
+          calendar.changeEvent(obj);
+          alert("일정을 수정했습니다")
         }
       }
     })

@@ -31,9 +31,13 @@
     <%- include('menu', {user:user}) %>
   </header>
 
-  <!-- 서버에서 보내준 일정데이터배열 -->
-  <input type="hidden" id="scheduleData" value="<%=JSON.stringify(data)%>" />
-
+  <!-- 서버에서 보내준 일정데이터 배열 -->
+  <% if (user) { %>
+    <input type="hidden" id="scheduleData" value="<%=JSON.stringify(data)%>"/>
+  <% } else { %>
+    <input type="hidden" id="scheduleData" value=""/>
+  <% } %>
+    
   <div class="container_calendar">
     <div id='calendar'></div>
   </div>
@@ -63,12 +67,44 @@
           </select>
 
           <button type="button" class="modal_btn" onclick="addCalendar()">등록</button>
-          <button type="button" class="modal_btn" onclick="">삭제</button>
           <button type="button" class="modal_btn" onclick="closeModal()">취소</button>
         </div>
       </div>
     </div>
   </div>
 	
+  <!-- 일정 변경 모달 -->
+  <div class="background_modal2">
+    <div class="window_modal2">
+      <div class="popup_modal2">
+        <div class="container_modal2">
+          
+          <label for="title2">일정내용</label>
+          <input type="text" id="title2">
+
+          <label for="start_date2">시작날짜</label>
+          <input type="date" id="start_date2">
+
+          <label for="end_date2">종료날짜</label>
+          <input type="date" id="end_date2">
+
+          <label for="select2">일정컬러</label>
+          <select name="color" id="select2">
+            <option style="background-color:rgba(0, 0, 255, 0.8); color:white;" value="rgba(0, 0, 255, 0.8)" selected>blue</option>
+            <option style="background-color:rgba(255, 166, 0, 0.8); color:white;" value="rgba(255, 166, 0, 0.8)">orange</option>
+            <option style="background-color:rgba(255, 0, 0, 0.8); color:white;" value="rgba(255, 0, 0, 0.8)">red</option>
+            <option style="background-color:rgba(0, 128, 0, 0.8); color:white;" value="rgba(0, 128, 0, 0.8">green</option>
+          </select>
+
+          <input type="hidden" id="schedule_id" value="">
+
+          <button type="button" class="modal_btn" onclick="editCalendar()">수정</button>
+          <button type="button" class="modal_btn" onclick="">삭제</button>
+          <button type="button" class="modal_btn" onclick="closeModal2()">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
