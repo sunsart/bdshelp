@@ -2,6 +2,14 @@ let calendar;
 let isLogin;  // 로그인 여부
 
 document.addEventListener('DOMContentLoaded', function() {
+  // todo
+  const addBtn = document.querySelector('#addBtn');
+  addBtn.addEventListener('click', () => {
+    if(todoInput.value !== ''){ 
+        createTodo();
+    }
+  })
+
   // db 저장된 일정
   let arrayData;
   let jsonData;
@@ -98,13 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
       })
     }
 
-    // let title = info.event.title;
-    // let start = info.event.startStr.substr(0, 10);
-    // let end = info.event.endStr.substr(0, 10);
-    // let color = info.event.backgroundColor;
-    // let id = info.event.id;
-    // detailSchedule(title, start, end, color, id);
-
     // console.log(info.event.startStr.substr(0, 10));
     // console.log("eClick:", info);
     //console.log('Event: ', info.event.extendedProps);
@@ -122,15 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.on("eventResize", info => console.log("eventResize:", info));
 
 });
-
-function detailSchedule(title, start, end, color, id) {
-  document.querySelector(".background_modal2").className = "background_modal2 show_modal2";
-  document.querySelector("#title2").value = title;
-  document.querySelector("#start_date2").value = start;
-  document.querySelector("#end_date2").value = end;
-  document.querySelector("#select2").value = color;
-  document.querySelector("#schedule_id").value = id;
-}
 
 function showModal() {
   if (!isLogin) {
@@ -190,42 +182,26 @@ function addCalendar() {
   }
 }
 
-function editCalendar() { 
-  let title = document.querySelector("#title2").value;
-  let start_date = document.querySelector("#start_date2").value;
-  let end_date = document.querySelector("#end_date2").value;
-  let color = document.querySelector("#select2").value;
-  let id = document.querySelector("#schedule_id").value;
-  
-  if(title == null || title == "") {
-    alert("일정내용을 입력하세요");
-  } else if(start_date == "") {
-    alert("시작날짜를 입력하세요");
-  } else if(end_date == "") {
-    alert("종료날짜를 입력하세요");
-  } else if(new Date(end_date)- new Date(start_date) < 0) { // date 타입으로 변경 후 확인
-    alert("종료날짜가 시작날짜보다 먼저입니다!");
-  } else { 
-    let obj = {
-      "title" : title,
-      "start" : start_date + " 00:00:00", // 2일 이상 일정추가시 캘린더에 하루 적게 표시되는 것을 수정하기 위해 시간 추가
-      "end" : end_date + " 24:00:00",
-      "backgroundColor" : color, 
-      "id" : id, 
-    } 
+function createTodo(event) {
+  const todoList = document.querySelector('#todoList');
 
-    $.ajax({
-      url : "/schedule_edit",
-      type : "POST",
-      data : {title:obj.title, start:obj.start, end:obj.end, color:obj.backgroundColor, id:obj.id},
-      success : function(data) {
-        if(data == "일정수정성공") {
-          calendar.changeEvent(obj);
-          alert("일정을 수정했습니다")
-        }
-      }
-    })
+  const newLi = document.createElement('li');       // li 생성
+  const newBtn = document.createElement('button');  // button 생성
+  const newSpan = document.createElement('span');   // span 생성
+  const todoInput = document.querySelector('#todoInput');
+    
+  newLi.appendChild(newBtn); // li안에 button 담기
+  newLi.appendChild(newSpan); // li안에 span 담기
+  // console.log(newLi)
+    
+  newSpan.textContent = todoInput.value; // span 안에 value값 담기
+    
+  todoList.appendChild(newLi);
+  // console.log(todoList)
+    
+  todoInput.value = ''; // value 값에 빈 문자열 담기
 
-    closeModal();
-  }
+  newBtn.addEventListener('click', () => { // 체크박스 클릭시 완료 표시
+		newLi.classList.toggle('complete');
+  });
 }

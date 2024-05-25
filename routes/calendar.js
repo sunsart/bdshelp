@@ -45,22 +45,6 @@ router.post('/schedule_add', function(req, res) {
   })
 })
 
-// schedule update
-router.post('/schedule_edit', function(req, res) {
-  let title = req.body.title
-  let start = req.body.start;
-  let end = req.body.end;
-  let color = req.body.color;
-  let id = req.body.id;
-
-  let sql = "UPDATE schedule SET title=?, start=?, end=?, color=? WHERE id=?";
-  let params = [title, start, end, color, id];
-  conn.query(sql, params, function(err, result) {
-    if(err) throw err;
-    res.send("일정수정성공");
-  })
-})
-
 // schedule 삭제
 router.post('/schedule_delete', function(req, res) {
   let schedule_id = req.body.id;
