@@ -65,7 +65,7 @@
   font-weight: 800;
 }
 
-input[type=text] {
+input[id=title] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -123,6 +123,15 @@ h1 {
     margin-bottom: 12px;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 100,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  cursor: pointer;
+}
+
 .container_todo {
     max-width: 400px;
     width: 100%;
@@ -132,39 +141,40 @@ h1 {
 }
 
 #inputField #todoInput {
-    width: calc(100% - 45px);
+    width: calc(100% - 80px);
     border: 1px solid #eee;
     border-radius: 4px;
     padding: 10px;
 }
 
 #inputField #todoInput:focus {
-    outline: none;
+    /* outline: none; */
 }
 
 #inputField #addBtn {
-    position: relative;
-    width: 35px;
-    height: 35px;
+    /* position: relative;
+    width: 36px;
+    height: 36px;
     border: none;
     background-color: #242423;
     border-radius: 4px;
     cursor: pointer;
-    vertical-align: middle;
+    vertical-align: middle; */
 }
 
+/* button 내부에 span 으로 플러스 아이콘 만들기 */
 #inputField #addBtn span {
-    display: block;
+    /* display: block;
     width: 2px;
     height: 15px;
     background-color: #FFE8AD;
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
-    left: 50%;
+    left: 50%; */
 }
 #inputField #addBtn span:last-child {
-    transform: translate(-50%,-50%) rotate(-90deg);
+    /* transform: translate(-50%,-50%) rotate(-90deg); */
 }
 
 #todoList {

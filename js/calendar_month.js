@@ -5,8 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // todo
   const addBtn = document.querySelector('#addBtn');
   addBtn.addEventListener('click', () => {
-    if(todoInput.value !== ''){ 
+    if (!isLogin) {
+      alert("로그인이 필요합니다");
+    } else {
+      if(todoInput.value !== '') {
         createTodo();
+      }
     }
   })
 
@@ -139,10 +143,6 @@ function closeModal() {
   document.querySelector(".background_modal").className = "background_modal";
 }
 
-function closeModal2() { 
-  document.querySelector(".background_modal2").className = "background_modal2";
-}
-
 function addCalendar() { 
   let title = document.querySelector("#title").value;
   let start_date = document.querySelector("#start_date").value;
@@ -183,25 +183,57 @@ function addCalendar() {
 }
 
 function createTodo(event) {
-  const todoList = document.querySelector('#todoList');
+  const todoList = document.querySelector('#todoList'); // ul
 
   const newLi = document.createElement('li');       // li 생성
-  const newBtn = document.createElement('button');  // button 생성
+
+  //const newBtn = document.createElement('button');  // 체크버튼 생성
+  const newBtn = document.createElement('span');  // 체크버튼 생성
+  newBtn.className = "material-symbols-outlined";
+  newBtn.innerText = "do_not_disturb_on";
+  newBtn.style.fontSize = 20+"px";
+
   const newSpan = document.createElement('span');   // span 생성
   const todoInput = document.querySelector('#todoInput');
     
-  newLi.appendChild(newBtn); // li안에 button 담기
+  newLi.appendChild(newBtn);  // li 안에 button 담기
   newLi.appendChild(newSpan); // li안에 span 담기
-  // console.log(newLi)
-    
   newSpan.textContent = todoInput.value; // span 안에 value값 담기
-    
   todoList.appendChild(newLi);
-  // console.log(todoList)
-    
-  todoInput.value = ''; // value 값에 빈 문자열 담기
 
-  newBtn.addEventListener('click', () => { // 체크박스 클릭시 완료 표시
-		newLi.classList.toggle('complete');
+  newBtn.addEventListener('click', () => { // 체크버튼 클릭시 완료 표시
+		deleteTodo(newLi);
   });
+
+  $.ajax({
+    url : "/todo_add",
+    type : "POST",
+    data : {title:todoInput.value},
+    success : function(data) {
+      if(data == "투두저장성공") {
+        //alert("등록 되었습니다")
+        //window.location.href = '/find_list';
+      }
+    }
+  })
+    
+  todoInput.value = ''; // todo 생성후 초기화
+}
+
+function deleteTodo(e) {
+	num = e.dataset.id;
+
+  if(confirm("삭제합니까?")) {
+		$.ajax({
+      url : "/todo_delete",
+      type : "POST",
+      data : {id:num},
+      success : function(data) {
+        if(data == "투두삭제성공") {
+          //alert("삭제 되었습니다")
+          window.location.href = '/calendar';
+        }
+      }
+    })
+	}
 }
