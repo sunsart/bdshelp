@@ -105,18 +105,6 @@ input[type=button]:hover {
   display: flex;
 }
 
-* {
-	/* box-sizing: border-box; */
-}
-
-body {
-    /* background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    min-height: 100vh; */
-}
 
 h1 {
     margin: 0;
@@ -140,6 +128,10 @@ h1 {
     padding: 20px;
 }
 
+#inputField {
+  display: flex;
+}
+
 #inputField #todoInput {
     width: calc(100% - 80px);
     border: 1px solid #eee;
@@ -147,34 +139,8 @@ h1 {
     padding: 10px;
 }
 
-#inputField #todoInput:focus {
-    /* outline: none; */
-}
-
 #inputField #addBtn {
-    /* position: relative;
-    width: 36px;
-    height: 36px;
-    border: none;
-    background-color: #242423;
-    border-radius: 4px;
-    cursor: pointer;
-    vertical-align: middle; */
-}
-
-/* button 내부에 span 으로 플러스 아이콘 만들기 */
-#inputField #addBtn span {
-    /* display: block;
-    width: 2px;
-    height: 15px;
-    background-color: #FFE8AD;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%; */
-}
-#inputField #addBtn span:last-child {
-    /* transform: translate(-50%,-50%) rotate(-90deg); */
+   font-size: 40px;
 }
 
 #todoList {
@@ -186,33 +152,28 @@ h1 {
 
 #todoList li {
   padding: 10px 0;
-  user-select: none;
 }
 
-#todoList button {
-  width: 15px;
-  height: 15px;
-  background-color: #fff;
-  margin-right: 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+#todoList #todo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  vertical-align: middle;
 }
 
-#todoList li.complete {
-  text-decoration: line-through;
-  color: rgb(155, 155, 155);
-}
-
-#todoList li.complete button::after {
-  content: "";
+#todoList #todo #todo_title {
   display: block;
-  width: 5px;
-  height: 10px;
-  transform: translate(-2px, -2px) rotate(45deg);
-  border-right: 2px solid #f1b116;
-  border-bottom: 2px solid #f1b116;
+  width: 320px;
+  text-align: left;
+  margin-left: 15px;
+  font-size: 16px;
+  /* 말줄임 표시 display를 inline에서 block으로 변경*/
+  white-space: nowrap;  
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 
 

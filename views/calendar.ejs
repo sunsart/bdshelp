@@ -44,7 +44,6 @@
     
 
   <div class="container_all">
-
     <!-- 캘린더 -->
     <div class="container_calendar">
       <div id='calendar'></div>
@@ -53,34 +52,29 @@
     <!-- todo -->
     <div class="container_todo">
       <h1>할 일</h1>
-      <div id="inputField" style="display: flex;">
+      <div id="inputField">
         <input type="text" id="todoInput" placeholder="할 일 추가하기">
-        <span class="material-symbols-outlined" id="addBtn" style="font-size: 40px;">add_box</span>
-        <!-- <button type="button" id="adBtn">
-          <span></span>
-          <span></span>
-        </button> -->
+        <span class="material-symbols-outlined" id="addBtn">add_box</span>
       </div>
       <% if (user) { %>
         <ul id="todoList">
           <% for(let i=0; i<data_2.length; i++) { %>
             <li>
-              <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; vertical-align: middle;">
-                <!-- <button style="display: inline;" id="<%= data_2[i].id %>" data-id="<%= data_2[i].id %>" onclick="deleteTodo(this)"> -->
-                <span class="material-symbols-outlined" style="font-size: 20px;" 
+              <div id="todo">
+                <span class="material-symbols-outlined" 
+                  style="font-size: 20px;" 
                   id="<%= data_2[i].id %>"
                   data-id="<%= data_2[i].id %>"
                   onclick="deleteTodo(this)">
                   do_not_disturb_on
                 </span>
-                <span class="" style="display: inline-block; width: 200px; text-align: left; margin-left: 20px; font-size: 16px;"> <%= data_2[i].title %> </span> 
+                <span id="todo_title"><%= data_2[i].title %></span> 
               </div>
             </li>
           <% } %> 
         </ul>
       <% } %>
     </div>
-
   </div>
 
 

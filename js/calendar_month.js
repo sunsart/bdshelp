@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!isLogin) {
       alert("로그인이 필요합니다");
     } else {
-      if(todoInput.value !== '') {
-        createTodo();
-      }
+      createTodo();
     }
   })
 
@@ -183,46 +181,28 @@ function addCalendar() {
 }
 
 function createTodo(event) {
-  const todoList = document.querySelector('#todoList'); // ul
-
-  const newLi = document.createElement('li');       // li 생성
-
-  //const newBtn = document.createElement('button');  // 체크버튼 생성
-  const newBtn = document.createElement('span');  // 체크버튼 생성
-  newBtn.className = "material-symbols-outlined";
-  newBtn.innerText = "do_not_disturb_on";
-  newBtn.style.fontSize = 20+"px";
-
-  const newSpan = document.createElement('span');   // span 생성
   const todoInput = document.querySelector('#todoInput');
-    
-  newLi.appendChild(newBtn);  // li 안에 button 담기
-  newLi.appendChild(newSpan); // li안에 span 담기
-  newSpan.textContent = todoInput.value; // span 안에 value값 담기
-  todoList.appendChild(newLi);
-
-  newBtn.addEventListener('click', () => { // 체크버튼 클릭시 완료 표시
-		deleteTodo(newLi);
-  });
-
-  $.ajax({
-    url : "/todo_add",
-    type : "POST",
-    data : {title:todoInput.value},
-    success : function(data) {
-      if(data == "투두저장성공") {
-        //alert("등록 되었습니다")
-        //window.location.href = '/find_list';
+  if(todoInput.value == null || todoInput.value == "") {
+    alert("할 일을 입력하세요");
+  } else if (todoInput.value.length > 20) {
+    alert("20글자 이하로 입력해주세요 (띄어쓰기 포함)");
+  } else {
+    $.ajax({
+      url : "/todo_add",
+      type : "POST",
+      data : {title:todoInput.value},
+      success : function(data) {
+        if(data == "투두저장성공") {
+          window.location.href = '/calendar';
+        }
       }
-    }
-  })
-    
-  todoInput.value = ''; // todo 생성후 초기화
+    })
+    todoInput.value = ''; // todo 생성후 초기화
+  }
 }
 
 function deleteTodo(e) {
 	num = e.dataset.id;
-
   if(confirm("삭제합니까?")) {
 		$.ajax({
       url : "/todo_delete",
@@ -230,7 +210,6 @@ function deleteTodo(e) {
       data : {id:num},
       success : function(data) {
         if(data == "투두삭제성공") {
-          //alert("삭제 되었습니다")
           window.location.href = '/calendar';
         }
       }
