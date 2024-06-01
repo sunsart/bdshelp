@@ -77,34 +77,32 @@
     </div>
   </div>
 
-
   <!-- 일정 등록 모달 -->
-  <div class="background_modal">
-    <div class="window_modal">
-      <div class="popup_modal">
-        <div class="container_modal">
-          
-          <label for="title">일정내용</label>
-          <input type="text" id="title">
+  <div class="modal">
+    <div class="modal_popup">
 
-          <label for="start_date">시작날짜</label>
-          <input type="date" id="start_date">
+      <label for="title">일정내용</label>
+      <input type="text" id="title">
 
-          <label for="end_date">종료날짜</label>
-          <input type="date" id="end_date">
+      <label for="start_date">시작날짜</label>
+      <input type="date" id="start_date">
 
-          <label for="select">일정컬러</label>
-          <select name="color" id="select">
-            <option style="background-color:rgba(0, 0, 255, 0.8); color:white;" value="rgba(0, 0, 255, 0.8)" selected>blue</option>
-            <option style="background-color:rgba(255, 166, 0, 0.8); color:white;" value="rgba(255, 166, 0, 0.8)">orange</option>
-            <option style="background-color:rgba(255, 0, 0, 0.8); color:white;" value="rgba(255, 0, 0, 0.8)">red</option>
-            <option style="background-color:rgba(0, 128, 0, 0.8); color:white;" value="rgba(0, 128, 0, 0.8">green</option>
-          </select>
+      <label for="end_date">종료날짜</label>
+      <input type="date" id="end_date">
 
-          <button type="button" class="modal_btn" onclick="addCalendar()">등록</button>
-          <button type="button" class="modal_btn" onclick="closeModal()">취소</button>
-        </div>
+      <label for="select">일정컬러</label>
+      <select name="color" id="select">
+        <option style="background-color:rgba(0, 0, 255, 0.8); color:white;" value="rgba(0, 0, 255, 0.8)" selected>blue</option>
+        <option style="background-color:rgba(255, 166, 0, 0.8); color:white;" value="rgba(255, 166, 0, 0.8)">orange</option>
+        <option style="background-color:rgba(255, 0, 0, 0.8); color:white;" value="rgba(255, 0, 0, 0.8)">red</option>
+        <option style="background-color:rgba(0, 128, 0, 0.8); color:white;" value="rgba(0, 128, 0, 0.8">green</option>
+      </select>
+
+      <div class="container_btn">
+        <button type="button" class="modal_btn" onclick="addCalendar()">등록</button>
+        <button type="button" class="modal_btn modal_btn_cancel" onclick="closeModal()">취소</button>
       </div>
+
     </div>
   </div>
 	

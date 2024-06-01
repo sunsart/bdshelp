@@ -131,14 +131,18 @@ function showModal() {
     alert("로그인이 필요합니다");
     return;
   }
-  document.querySelector(".background_modal").className = "background_modal show_modal";
+
+  const modal = document.querySelector('.modal');
+  modal.classList.add('on');
+
   document.querySelector("#title").value = "";
   document.querySelector("#start_date").value = "";
   document.querySelector("#end_date").value = "";
 }
 
 function closeModal() { 
-  document.querySelector(".background_modal").className = "background_modal";
+  const modal = document.querySelector('.modal');
+  modal.classList.remove('on');
 }
 
 function addCalendar() { 
