@@ -1,3 +1,4 @@
+/* --- 카드 뉴스 --- */
 .cards {
   display: flex;
   justify-content: center;
@@ -25,25 +26,34 @@ a:link {
 
 .title {
   font-weight: bold;
+  width: 250px;
+  height: 50px;
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .content {
   font-size: 14px;
-  margin-bottom: 30px;
+  width: 250px;
+  height: 120px;
+  margin-bottom: 40px;
+
+  /* 2줄 이상 텍스트 말 줄임표 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* 최대 라인수 */
+  -webkit-box-orient: vertical;
 }
 
 .press, .date {
   font-size: 14px;
-  margin-bottom: 5px;
-  display: inline-block;
 }
 
 
 /* --- 테이블 뉴스 --- */
 .table-news {
-  width: 65%;
+  width: 68%;
   margin : 40px auto;
 }
 

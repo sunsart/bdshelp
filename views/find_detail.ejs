@@ -55,12 +55,14 @@
       <label for="etc">기타</label>
       <textarea id="etc" rows="10" disabled> <%= data[0].etc %> </textarea> <br>
 
-      <% if (user && user.id == data[0].user_id ) { %>
-        <input type="button" name="edit" value="수정" onClick="location.href='/find_edit/<%= data[0].id %>'">
-        <input type="button" name="delete" value="삭제" onClick="deleteFind()">
-      <% } else { %>
+      <div>
         <input type="button" value="목록" onclick="location.href='/find_list'">
-      <% } %>
+
+        <% if (user && user.id == data[0].user_id ) { %>
+          <input type="button" name="edit" value="수정" onClick="location.href='/find_edit/<%= data[0].id %>'">
+          <input type="button" name="delete" value="삭제" onClick="deleteFind()">
+        <% } %>
+      </div>
     </div>
   </div>
 

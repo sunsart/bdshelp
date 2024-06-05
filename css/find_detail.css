@@ -40,6 +40,11 @@ textarea {
   margin-top: 4px;
 }
 
+.container_btn {
+  display: flex;
+}
+
+
 input[type=button] {
   background-color: #04AA6D;
   color: white;

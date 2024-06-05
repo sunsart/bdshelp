@@ -10,7 +10,7 @@ function checkSignup() {
   const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 
   if (id.length < 4 || id.length >= 20) 
-    alert("아이디는 4글자 이상 입력해주세요");
+    alert("아이디는 4자 ~ 20자로 입력해주세요");
   else if (pw1.length < 6)
     alert("비밀번호는 6글자 이상 입력해주세요");
   else if (pw1 != pw2)

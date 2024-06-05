@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
-  // db 저장된 일정
+  // db 저장된 schedule
   let arrayData;
   let jsonData;
   let headerToolbar; // 캘린더 헤더 옵션
@@ -77,8 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		nowIndicator: true, // 현재 시간 마크
     displayEventTime: false, // 시간 표시 x, 하루이상 일정등록시 end날짜 포함
     eventDisplay : 'block',
-    //eventBackgroundColor: , //이벤트의 배경색을 설정
-    //eventBorderColor: , //  이벤트의 테두리 색을 설정합니다.
 		locale: 'ko', // 한국어 설정
     events: arrayData    // 캘린더에 표시할 이벤트 데이터를 정의 
 	};
@@ -90,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 캘린더 이벤트 등록
   calendar.on("eventAdd", info => console.log("Add:", info));
-  calendar.on("eventChange", info => console.log("Change:", info));
   calendar.on("eventRemove", info => console.log("Remove:", info));
+  calendar.on("select", info => { showModal(); });
   calendar.on("eventClick", info => {
     let result = confirm("일정을 삭제할까요?");
     if (result) {
@@ -107,23 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       })
     }
-
-    // console.log(info.event.startStr.substr(0, 10));
-    // console.log("eClick:", info);
-    //console.log('Event: ', info.event.extendedProps);
-    //console.log('Coordinates: ', info.jsEvent);
-    //console.log('View: ', info.view);
-    // 재미로 그냥 보더색 바꾸깅
-    //info.el.style.borderColor = 'red';
   });
-  //calendar.on("eventMouseEnter", info => console.log("eEnter:", info));
-  //calendar.on("eventMouseLeave", info => console.log("eLeave:", info));
-  //calendar.on("dateClick", info => console.log("dateClick:", info));
-  calendar.on("select", info => { showModal(); });
-  calendar.on("drop", info => console.log("drop:", info));
-  calendar.on("eventDrop", info => console.log("eventDrop:", info));
-  calendar.on("eventResize", info => console.log("eventResize:", info));
-
 });
 
 function showModal() {
@@ -132,15 +114,18 @@ function showModal() {
     return;
   }
 
+  // 모달 show
   const modal = document.querySelector('.modal');
   modal.classList.add('on');
 
+  // 입력창 초기화
   document.querySelector("#title").value = "";
   document.querySelector("#start_date").value = "";
   document.querySelector("#end_date").value = "";
 }
 
 function closeModal() { 
+  // 모달 off
   const modal = document.querySelector('.modal');
   modal.classList.remove('on');
 }
@@ -175,7 +160,6 @@ function addCalendar() {
         if(data == "일정등록성공") {
           calendar.addEvent(obj);
           alert("일정을 등록했습니다")
-          //window.location.href = '/calendar';
         }
       }
     })
@@ -185,6 +169,12 @@ function addCalendar() {
 }
 
 function createTodo(event) {
+  const count = document.querySelector('#todoList').childElementCount;
+  if(count >= 15) {
+    alert("할 일은 15개까지만 등록할 수 있습니다");
+    return;
+  }
+
   const todoInput = document.querySelector('#todoInput');
   if(todoInput.value == null || todoInput.value == "") {
     alert("할 일을 입력하세요");
@@ -198,6 +188,7 @@ function createTodo(event) {
       success : function(data) {
         if(data == "투두저장성공") {
           window.location.href = '/calendar';
+          // 화면을 리로드하지 않고 ajax 사용하여 부분 갱신하는 방법 필요
         }
       }
     })
@@ -207,7 +198,7 @@ function createTodo(event) {
 
 function deleteTodo(e) {
 	num = e.dataset.id;
-  if(confirm("삭제합니까?")) {
+  if(confirm("삭제할까요?")) {
 		$.ajax({
       url : "/todo_delete",
       type : "POST",
@@ -215,6 +206,7 @@ function deleteTodo(e) {
       success : function(data) {
         if(data == "투두삭제성공") {
           window.location.href = '/calendar';
+          // 화면을 리로드하지 않고 ajax 사용하여 부분 갱신하는 방법 필요
         }
       }
     })

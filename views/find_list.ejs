@@ -34,6 +34,24 @@
   </div>
 
 	<!-- 매물찾아요 Cards -->
+	<!-- 오늘 게시물 중에서 랜덤으로 4개 표시함 -->
+
+	<% if (data.length > 4) { %>
+		<% for(let i=0; i<4; i++) { %>
+			let rand = Math.floor(Math.random() * <%= data.length %>);
+			<div class="card">
+				<a href="/find_detail/<%= data[rand].id %>"> <p class="title"><%= data[rand].title %></p> </a>
+				<a href="/find_detail/<%= data[rand].id %>"> <p class="region">지역 : <%= data[rand].region %></p> </a>
+				<a href="/find_detail/<%= data[rand].id %>"> <p class="area">면적 : <%= data[rand].area %></p> </a>
+				<a href="/find_detail/<%= data[rand].id %>"> <p class="cost">금액 : <%= data[rand].cost %></p> </a> <br>
+				<a href="/find_detail/<%= data[rand].id %>"> <p class="etc"><%= data[rand].etc %></p> </a> <br>
+				<p class="id"> <%= data[rand].user_name %> </p>
+			</div>
+		<% } %>
+	<% } else { %>
+
+	<% } %>
+
 	<div class="cards">
 		<% for(let i=0; i<data.length; i++) { %>
 			<div class="card">

@@ -7,10 +7,17 @@ function postFind() {
   let tel = document.getElementById("tel").value;
   let etc = document.getElementById("etc").value;
   
+  // 전화번호 정규식, 000-0000-0000
+  const regexPhoneNum = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
+
   if(title == "")
     alert("제목을 입력하세요");
   else if(tel == "")
     alert("연락처를 입력하세요");
+  else if(regexPhoneNum.test(tel) === false)
+    alert("전화번호 형식이 올바르지 않습니다");
+  else if(etc == "")
+    alert("내용을 입력하세요");
   else {
     $.ajax({
       url : "/find_post",

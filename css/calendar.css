@@ -7,7 +7,6 @@
   margin: 20px auto;
 }
 
-
 /* todo */
 .container_todo {
   max-width: 400px;
@@ -28,6 +27,14 @@ h1 {
   'GRAD' 0,
   'opsz' 24;
   cursor: pointer;
+  font-size: 20px;
+}
+.material-symbols-outlined:hover {
+  font-variation-settings:
+  'FILL' 100,
+  'wght' 5000,
+  'GRAD' 0,
+  'opsz' 24;
 }
 #inputField {
   display: flex;
@@ -58,12 +65,14 @@ h1 {
   vertical-align: middle;
 }
 #todoList #todo #todo_title {
-  display: block;
+  display: inline;
   width: 320px;
   text-align: left;
   margin-left: 15px;
   font-size: 16px;
-  /* 말줄임 표시 display를 inline에서 block으로 변경*/
+
+  /* 말줄임 표시 : display를 inline에서 block으로 변경*/
+  display: block;
   white-space: nowrap;  
   overflow: hidden;
   text-overflow: ellipsis;
