@@ -30,30 +30,16 @@
   </header>
 
 	<div class="board_name">
-    <span>매물찾아요 게시판</span>
+    <span>매물찾아요</span>
   </div>
 
 	<!-- 매물찾아요 Cards -->
-	<!-- 오늘 게시물 중에서 랜덤으로 4개 표시함 -->
-
-	<% if (data.length > 4) { %>
-		<% for(let i=0; i<4; i++) { %>
-			let rand = Math.floor(Math.random() * <%= data.length %>);
-			<div class="card">
-				<a href="/find_detail/<%= data[rand].id %>"> <p class="title"><%= data[rand].title %></p> </a>
-				<a href="/find_detail/<%= data[rand].id %>"> <p class="region">지역 : <%= data[rand].region %></p> </a>
-				<a href="/find_detail/<%= data[rand].id %>"> <p class="area">면적 : <%= data[rand].area %></p> </a>
-				<a href="/find_detail/<%= data[rand].id %>"> <p class="cost">금액 : <%= data[rand].cost %></p> </a> <br>
-				<a href="/find_detail/<%= data[rand].id %>"> <p class="etc"><%= data[rand].etc %></p> </a> <br>
-				<p class="id"> <%= data[rand].user_name %> </p>
-			</div>
-		<% } %>
-	<% } else { %>
-
-	<% } %>
-
+	<!-- 최근 게시물 4개만 card 형식으로 표시, 검색결과에도 적용 -->
 	<div class="cards">
 		<% for(let i=0; i<data.length; i++) { %>
+			<% if(i >= 4) { %>
+				<%	 break; } %>
+
 			<div class="card">
 				<a href="/find_detail/<%= data[i].id %>"> <p class="title"><%= data[i].title %></p> </a>
 				<a href="/find_detail/<%= data[i].id %>"> <p class="region">지역 : <%= data[i].region %></p> </a>
@@ -62,14 +48,17 @@
 				<a href="/find_detail/<%= data[i].id %>"> <p class="etc"><%= data[i].etc %></p> </a> <br>
 				<p class="id"> <%= data[i].user_name %> </p>
 			</div>
+
 		<% } %>
 	</div>
 	
+	<!-- 매물찾아요 검색창 -->
 	<form class="example" method="GET" action="/find_search">
 		<input type="text" name="search" placeholder="검색어를 입력하세요">
 		<button type="submit"><i class="fa fa-search"></i></button>
 	</form>
 
+	<!-- 매물찾아요 테이블 -->
 	<div class="container">
 		<table>
 			<thead>
@@ -94,11 +83,13 @@
 		</table>
 	</div>
 
-	<div style="text-align: center;">
+	<div>
 		<% if (user) { %>
-			<button class="write_button" style="visibility:visible;" onclick="location.href='./find_write'">글쓰기</button>
+			<button class="buttons" id="list_btn" style="visibility:visible;" onclick="location.href='./find_list'">목록</button>
+			<button class="buttons" id="write_btn" style="visibility:visible;" onclick="location.href='./find_write'">글쓰기</button>
 		<% } else { %>
-			<button class="write_button" style="visibility:hidden;" onclick="location.href='./find_write'">글쓰기</button>
+			<button class="buttons" id="list_btn" style="visibility:visible;" onclick="location.href='./find_list'">목록</button>
+			<button class="buttons" id="write_btn" style="visibility:hidden;" onclick="location.href='./find_write'">글쓰기</button>
 		<% } %>
 	</div>
 	

@@ -33,7 +33,7 @@
 
   <div class="container_input">
     <div class="row">
-      <input type="text" id="find-id" value="<%= data[0].id %>" hidden>
+      <input type="text" id="find_id" value="<%= data[0].id %>" hidden>
 
       <label for="title">*제목</label>
       <input type="text" id="title" value="<%= data[0].title %>"> <br>
@@ -44,7 +44,7 @@
       <label for="area">면적</label>
       <input type="text" id="area" value="<%= data[0].area %>"> <br>
 
-      <label for="cost">비용</label>
+      <label for="cost">금액</label>
       <input type="text" id="cost" value="<%= data[0].cost %>"> <br>
 
       <label for="tel">*연락처</label>
@@ -52,7 +52,7 @@
     </div>
     
     <div class="container_textarea">
-      <label for="etc">기타</label>
+      <label for="etc">*내용</label>
       <textarea id="etc" rows="10"> <%= data[0].etc %> </textarea> <br>
 
         <input type="button" name="edit" value="수정완료" onClick="editFind()">

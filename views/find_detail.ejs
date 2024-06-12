@@ -33,7 +33,7 @@
 
   <div class="container_input">
     <div class="row">
-      <input type="text" id="find-id" value="<%= data[0].id %>" hidden>
+      <input type="text" id="find_id" value="<%= data[0].id %>" hidden>
 
       <label for="title">*제목</label>
       <input type="text" id="title" value="<%= data[0].title %>" disabled> <br>
@@ -44,7 +44,7 @@
       <label for="area">면적</label>
       <input type="text" id="area" value="<%= data[0].area %>" disabled> <br>
 
-      <label for="cost">비용</label>
+      <label for="cost">금액</label>
       <input type="text" id="cost" value="<%= data[0].cost %>" disabled> <br>
 
       <label for="tel">*연락처</label>
@@ -52,11 +52,11 @@
     </div>
     
     <div class="container_textarea">
-      <label for="etc">기타</label>
+      <label for="etc">*내용</label>
       <textarea id="etc" rows="10" disabled> <%= data[0].etc %> </textarea> <br>
 
-      <div>
-        <input type="button" value="목록" onclick="location.href='/find_list'">
+      <div class="buttons">
+        <input type="button" name="list" value="목록" onclick="location.href='/find_list'">
 
         <% if (user && user.id == data[0].user_id ) { %>
           <input type="button" name="edit" value="수정" onClick="location.href='/find_edit/<%= data[0].id %>'">

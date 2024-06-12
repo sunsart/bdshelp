@@ -127,7 +127,7 @@ form.example::after {
 table { 
   line-height: 40px; 
   width: 70%;
-  margin : 40px auto;
+  margin : 30px auto;
 }
 
 table, th, td { 
@@ -152,7 +152,7 @@ table, th, td {
   text-align: center;
 }
 
-.write_button {
+.buttons {
   border: none; 
   color: white; 
   padding: 10px 20px; 
@@ -160,6 +160,15 @@ table, th, td {
   background-color: #04AA6D;
 }
 
-.write_button:hover {
+.buttons:hover {
   background-color: #46a049;
+}
+
+#list_btn {
+  margin-left: 255px;
+  margin-bottom: 50px;
+}
+
+#write_btn {
+  margin-left: 1025px;
 }

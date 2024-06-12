@@ -32,21 +32,23 @@
 
   <div class="container_input">
     <form action="/document_upload" method="POST" enctype="multipart/form-data">
+
       <div class="row">
         <label for="title">*제목</label>
         <input type="text" id="title" name="title" required> <br>
       </div>
-      
+
       <div class="container_textarea">
         <label for="content">내용</label>
         <textarea id="content" name="content" rows="10"></textarea> <br>
-
-        <div class="buttons">
-          <input type="file" name="file">
-          <p class="file_limit">첨부파일의 크기는 2 MB를 초과할 수 없습니다</p>
-          <button type="submit"> 파일첨부 </button>
-        </div>
+        <input type="file" name="file">
+        <span class="file_limit">
+          *첨부파일의 크기는 2 MB를 초과할 수 없습니다
+        </span>
       </div>
+
+      <button type="submit"> 파일첨부 </button>
+
     </form>
   </div>
 </body>

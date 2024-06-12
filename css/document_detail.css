@@ -35,6 +35,10 @@ input[type=text], textarea {
   font-size: 15px;
 }
 
+textarea {
+  resize: none;
+}
+
 .container_textarea *{
 	vertical-align:middle;
   margin-top: 4px;
@@ -46,10 +50,23 @@ input[type=button] {
   padding: 10px 20px; 
   cursor: pointer;
   background-color: #04AA6D;
+  margin-top: 20px;
 }
 
 input[type=button]:hover {
   background-color: #46a049;
+}
+
+input[name=list] {
+  margin-left: -850px;
+}
+
+input[name=edit] {
+  margin-left: 350px;
+}
+
+input[name=delete] {
+  margin-left: 350px;
 }
 
 

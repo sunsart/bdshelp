@@ -32,6 +32,7 @@ textarea[id=content] {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 20px;
+  resize: none;
 }
 
 input[type=button] {

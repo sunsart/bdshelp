@@ -30,15 +30,24 @@ input[type=text], textarea {
   font-size: 15px;
 }
 
+textarea {
+  resize: none;
+}
+
 .container_textarea *{
 	vertical-align:middle;
   margin-top: 4px;
 }
 
-.buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+input[type=file] {
+  margin-top: 20px;
+}
+
+.file_limit {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 14px;
+  color: red;
 }
 
 button[type=submit] {
@@ -46,9 +55,9 @@ button[type=submit] {
   color: white;
   padding: 12px 20px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  margin: 20px auto;
+  margin-top: 20px;
+  margin-left: 1000px;
 }
 
 button[type=submit]:hover {

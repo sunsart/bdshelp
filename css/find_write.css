@@ -1,4 +1,4 @@
-.board-name {
+.board_name {
   margin: 40px auto;
   font-size: 20px;
   text-align: center;
@@ -35,14 +35,18 @@ input[type=text], textarea {
   margin-top: 4px;
 }
 
+textarea {
+  resize: none;
+}
+
 input[type=button] {
   background-color: #04AA6D;
   color: white;
   padding: 12px 20px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  margin: 20px auto;
+  margin-top: 20px;
+  margin-left: 1020px;
 }
 
 input[type=button]:hover {
